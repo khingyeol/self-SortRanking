@@ -5,6 +5,16 @@
 .App-logo {
   height: 40vmin;
   pointer-events: none;
+  z-index: 0;
+}
+
+.stack {
+  z-index: 100;
+  width: 40vmax;
+}
+
+.stack-btn {
+  /* width: 35vmax; */
 }
 
 @media (prefers-reduced-motion: no-preference) {
