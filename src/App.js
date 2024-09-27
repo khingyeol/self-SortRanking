@@ -20,15 +20,47 @@ import {
   useDisclosure,
 } from "@chakra-ui/react";
 import React from "react";
+import { BrowserRouter, Routes, Route, createBrowserRouter, RouterProvider, useNavigate, Outlet } from "react-router-dom";
+import Countdown from "CountdownPage/Countdown";
 
-function App() {
+const router = createBrowserRouter([
+  {
+    path: "/",
+    Component: HomePage,
+    children: [
+      {
+        path: "child",
+        Component: () => {
+          return <>
+          BABY
+          </>
+        }
+        
+      }
+    ]
+  },
+  {
+    path: "countdown",
+    Component: Countdown
+  }
+])
+
+
+function HomePage() {
   var img =
     "https://i.pinimg.com/474x/f8/61/b5/f861b56f481b6f416570f27e1ddbe38c.jpg";
   const { isOpen, onOpen, onClose } = useDisclosure();
   const cancelRef = React.useRef();
+  
+  let navigate = useNavigate(); 
+
+  const onClickroute = () => {  
+    let path = `countdown`; 
+    navigate(path);
+  }
 
   return (
-    <ChakraProvider>
+    <>
       <div className="App">
         <header className="App-header">
           <img src={img} className="App-logo" alt="logo" />
@@ -39,10 +71,19 @@ function App() {
             </Text>
             <Spacer />
             <Stack className="stack-btn" spacing="16px">
-              <Button size="lg" padding='20px' onClick={onOpen}>
+              <Button size="lg" padding="20px" onClick={onOpen}>
                 Click me 👆🏻
               </Button>
               <Divider />
+              <Button
+                size="lg"
+                padding="20px"
+                bgColor={"#89CFF0"}
+                onClick={onClickroute}
+              >
+                📅 Doyoung Countdown
+              </Button>
+              <Outlet />
               {/* <Button size="lg">ss</Button> */}
             </Stack>
           </Stack>
@@ -75,6 +116,14 @@ function App() {
           </AlertDialogContent>
         </AlertDialogOverlay>
       </AlertDialog>
+    </>
+  );
+}
+
+function App() {
+  return (
+    <ChakraProvider>
+      <RouterProvider router={router}></RouterProvider>
     </ChakraProvider>
   );
 }
