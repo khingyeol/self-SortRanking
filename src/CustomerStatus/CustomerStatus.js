@@ -93,7 +93,7 @@ function CustomerStatus() {
   const [togglePanel, setTogglePanel] = useState(false);
   const [errorPanel, setErrorPanel] = useState(false);
   const [pwPanel, setPwPanel] = useState(false);
-  const [pwValue, setPwValue] = useState(["", "", "", ""])
+  const [onLoad, setOnLoad] = useState(true)
 
   const initialRef = React.useRef(null);
   const finalRef = React.useRef(null);
@@ -113,9 +113,11 @@ function CustomerStatus() {
       .then(async (response) => {
         const ab = await response.json();
         setCusdata(ab);
+        setOnLoad(false);
       })
       .catch((error) => {
         console.error("Error fetching CSV data:", error);
+        setOnLoad(false);
       });
   };
 
@@ -207,6 +209,7 @@ function CustomerStatus() {
               position={"relative"}
             >
               <Button
+              isLoading={onLoad}
                 onClick={onClickSearch}
                 colorScheme="purtaple"
                 rounded={"full"}
