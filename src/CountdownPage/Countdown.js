@@ -11,7 +11,6 @@ import {
   Image,
   Divider,
   Button,
-  ChakraProvider,
   Text,
   Heading,
   Stack,
@@ -99,6 +98,19 @@ const FindDiffTime = (date) => {
     return allText
 }
 
+const subString = (string) => {
+  // for (int len = )
+  // va
+  return (
+    "Hello"
+    // string.replace(/\W*(Days)\W*/"eiei")
+    // <>
+    // 2 Days<br />
+    // 2 Hours
+    // </>
+  )
+}
+
 function Countdown() {
     var igPost = "2024-09-25T03:41:53.000Z";
     var weversePost = "2024-09-24T05:42:25.934Z";
@@ -124,7 +136,8 @@ function Countdown() {
           <Text fontSize="6xl" color='red' fontWeight='bold' textAlign='center'>MISSING</Text>
           <SimpleGrid columns={2} spacing={10}>
             <Box textAlign='center' display='flex' flexDirection='column'>
-            <Text fontSize="3xl" fontFamily='Orbitron'>{ctime}</Text>
+            <Text fontSize="3xl" fontFamily='Orbitron'>{subString(ctime)}</Text>
+            {/* <Text fontSize="3xl" fontFamily='Orbitron'>{ctime}</Text> */}
               <Text fontSize="xl">since Doyoung latest post on Weverse.. </Text>
               {/* <Tag size="lg" colorScheme="#00d6ae" borderRadius="full">
                 <Avatar
@@ -139,7 +152,7 @@ function Countdown() {
               <Image src="https://i.imgur.com/jLm7M6g.png" />
             </Box>
             <Box textAlign='center' display='flex' flexDirection='column'>
-            <Text fontSize="3xl" fontFamily='Orbitron'>{itime}</Text>
+            <Text fontSize="3xl" fontFamily='Orbitron'> <br />{itime}</Text>
 
               <Text fontSize="xl">
                 since Doyoung latest post on Instagram..{" "}

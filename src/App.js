@@ -18,10 +18,31 @@ import {
   Stack,
   Spacer,
   useDisclosure,
+  extendTheme,
 } from "@chakra-ui/react";
 import React from "react";
 import { BrowserRouter, Routes, Route, createBrowserRouter, RouterProvider, useNavigate, Outlet } from "react-router-dom";
 import Countdown from "CountdownPage/Countdown";
+import TruzCustom from "TruzCustom/TruzCustom";
+import CustomerStatus from "CustomerStatus/CustomerStatus";
+
+const theme = extendTheme({
+  colors: {
+    purtaple: {
+      '50': '#f8f7fb',
+      '100': '#f3f0f7',
+      '200': '#e7e4f0',
+      '300': '#d5cfe3',
+      '400': '#beb3d2',
+      '500': '#8f76ab',
+      '600': '#8f76ab',
+      '700': '#80679a',
+      '800': '#6b5681',
+      '900': '#59486a',
+      '950': '#3a2e47',
+  },
+  },
+})
 
 const router = createBrowserRouter([
   {
@@ -39,9 +60,21 @@ const router = createBrowserRouter([
       }
     ]
   },
+  // {
+  //   path: "countdown",
+  //   Component: Countdown
+  // },
+  // {
+  //   path: "truz-custom",
+  //   Component: TruzCustom
+  // },
   {
-    path: "countdown",
-    Component: Countdown
+    path: "customer-status",
+    Component: CustomerStatus
+  },
+  {
+    path: "*",
+    Component: HomePage
   }
 ])
 
@@ -54,9 +87,8 @@ function HomePage() {
   
   let navigate = useNavigate(); 
 
-  const onClickroute = () => {  
-    let path = `countdown`; 
-    navigate(path);
+  const onClickroute = (pathName) => {  
+    navigate(pathName);
   }
 
   return (
@@ -79,9 +111,18 @@ function HomePage() {
                 size="lg"
                 padding="20px"
                 bgColor={"#89CFF0"}
-                onClick={onClickroute}
+                onClick={() => onClickroute('countdown')}
               >
                 📅 Doyoung Countdown
+              </Button>
+              <Divider />
+              <Button
+                size="lg"
+                padding="20px"
+                bgColor={"#FFEE8C"}
+                onClick={() => onClickroute('truz-custom')}
+              >
+                TRUZ Customize
               </Button>
               <Outlet />
               {/* <Button size="lg">ss</Button> */}
@@ -122,7 +163,7 @@ function HomePage() {
 
 function App() {
   return (
-    <ChakraProvider>
+    <ChakraProvider theme={theme}>
       <RouterProvider router={router}></RouterProvider>
     </ChakraProvider>
   );

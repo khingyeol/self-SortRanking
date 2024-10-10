@@ -11,3 +11,64 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+
+.select-avatar {
+  aspect-ratio: 1 / 1; 
+padding: 0.5rem; 
+border-width: 2px; 
+outline-style: none; 
+height: 100px;
+/* width: calc(200px*0.82);
+height: calc(200px*0.82); */
+}
+
+.select-avatar .selected {
+  border-style: solid;
+  border-color: red;
+  background-color: blue;
+}
+
+
+.select {
+  background-color: red;
+  stroke-width: 2px;
+  stroke: blue;
+}
+
+.select-decor {
+
+}
+
+.pfp-display {
+  overflow: hidden;
+  position: relative;
+  /* border-radius: 9999px; */
+   width: 500px;
+   height: 500px;
+   /* min-width: 500px; */
+  /* min-height: 900px;  */
+}
+
+.pfp-avatar {
+  position: absolute;
+  /* border-radius: 9999px; */
+  top: calc(500px*0.09);
+  left: calc(500px*0.09);
+  width: calc(500px*0.82);
+  height: calc(500px*0.82);
+}
+
+.pfp-decor {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.sns-btn:hover {
+  background-color: '#7f6998';
+}
+
+.sns-btn .icon {
+  width: 20px;
+}
