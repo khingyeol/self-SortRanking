@@ -104,7 +104,18 @@ function CustomerStatus() {
       .then(async (response) => {
         const ab = await response.text();
         console.log(parseCSV(ab));
-        setCusdata(parseCSV(ab));
+        const text = `,twitter,member,random,price,shipping,status,address
+,@purtaple,ฮยอนซอก,,800,,ยังไม่ชำระ,
+,@purtaple,โดยอง,,,,,
+,@_hyunyo ,แจฮยอก,poster no.4,800,,ยังไม่ชำระ,
+,@_hyunyo ,อาซาฮิ,,,,,
+,@pngprmxx,จองอู,,800,,ชำระแล้ว,
+,@pngprmxx,โยชิ,group pc no.1,,,,
+,@kstwrp,จีฮุน,poster no.3,400,,ชำระแล้ว,
+,@julyjul_pp,จุนกยู,,400,,ยังไม่ชำระ,
+,@sojungsocool,ฮารุโตะ,group pc no.2,800,,ยังไม่ชำระ,
+,@sojungsocool,จองฮวาน,,,,,`
+        setCusdata(parseCSV(text));
       })
       .catch((error) => {
         console.error("Error fetching CSV data:", error);
