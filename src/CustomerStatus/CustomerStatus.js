@@ -352,7 +352,7 @@ function CustomerStatus() {
                       </Text>
                     </Heading>
 
-                    <Box bg="purtaple.100" px={3} py={1} borderRadius={"10px"} sx={{zIndex: -2}}>
+                    <Box bg="purtaple.100" px={3} py={1} borderRadius={"10px"}>
                       <Stack direction={"row"} align={"center"}>
                         <Text color={"purtaple.950"} fontWeight={500}>
                           พร้อมเพย์ 098-274-3171
