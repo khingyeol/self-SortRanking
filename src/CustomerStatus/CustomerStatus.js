@@ -49,6 +49,25 @@ import {
   Thead,
   Tr,
   useSafeLayoutEffect,
+  Card,
+  CardBody,
+  CardHeader,
+  StackDivider,
+  Alert,
+  AlertDescription,
+  AlertIcon,
+  AlertTitle,
+  FormControl,
+  FormLabel,
+  Modal,
+  ModalBody,
+  ModalCloseButton,
+  ModalContent,
+  ModalFooter,
+  ModalHeader,
+  ModalOverlay,
+  PinInput,
+  PinInputField,
 } from "@chakra-ui/react";
 import React, { useEffect, useState } from "react";
 import { ReactComponent as TwitterIcon } from "assets/twitter.svg";
@@ -60,34 +79,24 @@ import {
   ChevronDownIcon,
   CopyIcon,
   DeleteIcon,
+  EditIcon,
   InfoOutlineIcon,
   ViewIcon,
 } from "@chakra-ui/icons";
 
-// @ts-ignore
-function parseCSV(csvText) {
-  const rows = csvText.toString().split(/\r?\n/); // Split CSV text into rows, handling '\r' characters
-  const headers = rows[0].toString().split(","); // Extract headers (assumes the first row is the header row)
-  const data = []; // Initialize an array to store parsed data
-  for (let i = 1; i < rows.length; i++) {
-    const rowData = rows[i].split(","); // Split the row, handling '\r' characters
-    const rowObject = {};
-    for (let j = 0; j < headers.length; j++) {
-      rowObject[headers[j]] = rowData[j];
-    }
-    data.push(rowObject);
-  }
-  return data;
-}
-
 function CustomerStatus() {
   const csvUrl =
-    "https://docs.google.com/spreadsheets/d/e/2PACX-1vQsxvZoGNsNyRBm4HxuDGs-F2xtOsB_JRL4OuqB16kDTfjW09LyddmAOi7MfphZ5SZUXN2I6u70rbtI/pub?output=csv";
+    "https://script.googleusercontent.com/macros/echo?user_content_key=x4MJk4HV3d5SliDHujbryjCcCKVZxIOLumqMvdynF9dti7YNr0O5aDAygYwyqZGeryonJbyi7gYrfQzZwmjq60FTyyOmFaz3m5_BxDlH2jW0nuo2oDemN9CCS2h10ox_1xSncGQajx_ryfhECjZEnBu3upqJUjaRu7_0LDKP20p4snDiVZdRN3tPLF4tGGBERP_5eoiPKusF5kwXkIxLkmaeLnkyXxDitTcw1CcojaElWreZ2z63Yg&lib=MVX27MvgmEuJ0aIAFVClAKwZwCnP0CvWQ";
   const [cusdata, setCusdata] = useState([]);
   const [displayData, setDisplayData] = useState([]);
   const [inputStr, setInputStr] = useState("");
   const [togglePanel, setTogglePanel] = useState(false);
   const [errorPanel, setErrorPanel] = useState(false);
+  const [pwPanel, setPwPanel] = useState(false);
+  const [pwValue, setPwValue] = useState(["", "", "", ""])
+
+  const initialRef = React.useRef(null);
+  const finalRef = React.useRef(null);
 
   useEffect(() => {
     (async () => {
@@ -102,20 +111,8 @@ function CustomerStatus() {
 
     fetch(csvUrl, options)
       .then(async (response) => {
-        const ab = await response.text();
-        console.log(parseCSV(ab));
-        const text = `,twitter,member,random,price,shipping,status,address
-,@purtaple,ฮยอนซอก,,800,,ยังไม่ชำระ,
-,@purtaple,โดยอง,,,,,
-,@_hyunyo,แจฮยอก,poster no.4,800,,ยังไม่ชำระ,
-,@_hyunyo,อาซาฮิ,,,,,
-,@pngprmxx,จองอู,,800,,ชำระแล้ว,
-,@pngprmxx,โยชิ,group pc no.1,,,,
-,@kstwrp,จีฮุน,poster no.3,400,,ชำระแล้ว,
-,@julyjul_pp,จุนกยู,,400,,ยังไม่ชำระ,
-,@sojungsocool,ฮารุโตะ,group pc no.2,800,,ยังไม่ชำระ,
-,@sojungsocool,จองฮวาน,,,,,`
-        setCusdata(parseCSV(text));
+        const ab = await response.json();
+        setCusdata(ab);
       })
       .catch((error) => {
         console.error("Error fetching CSV data:", error);
@@ -133,20 +130,46 @@ function CustomerStatus() {
         if (arr.twitter.includes(inputStr)) {
           return arr;
         }
-        console.log("arr");
-        // arr.twitter.includes(inputStr)
       });
-      console.log("filtered", filtered);
       setDisplayData(filtered);
-      console.log("displayData", displayData);
-      setTogglePanel(true);
-      setErrorPanel(false);
+
+      if (filtered[0].phone) {
+        setPwPanel(true);
+        setErrorPanel(false);
+        setTogglePanel(false);
+      } else {
+        setTogglePanel(true);
+        setErrorPanel(false);
+      }
     } else {
       setTogglePanel(false);
       setErrorPanel(true);
     }
   };
 
+  const statusMapped = (status) => {
+    if (status === "ชำระแล้ว") {
+      return <Tag bgColor="teal.100">{status}</Tag>;
+    } else if (status === "ยังไม่ชำระ") {
+      return <Tag bgColor="red.100">{status}</Tag>;
+    } else {
+      return <></>;
+    }
+  };
+
+  const onCompletePin = (value) => {
+    const pw = displayData[0].phone
+    if (value.length > 3) {
+        if (pw.includes(value)) {
+            setPwPanel(false);
+            setTogglePanel(true);
+            setErrorPanel(false)
+        } else {
+            setPwPanel(false);
+            setErrorPanel(true)
+        }
+    }
+  }
   return (
     <>
       <Container maxW={"3xl"}>
@@ -196,10 +219,34 @@ function CustomerStatus() {
           {errorPanel && (
             <Box backgroundColor="red.50" py={4} borderRadius={"10px"}>
               <Text color={"red.800"} fontWeight={500}>
-                ไม่พบชื่อผู้ใช้นี้
+                ไม่พบชื่อผู้ใช้นี้ หรือใส่เบอร์โทรผิด
               </Text>
             </Box>
           )}
+          <Modal
+            initialFocusRef={initialRef}
+            finalFocusRef={finalRef}
+            isOpen={pwPanel}
+            onClose={() => setPwPanel(false)}
+            isCentered
+          >
+            <ModalOverlay />
+            <ModalContent alignItems={'center'} >
+              <ModalHeader>กรอกเลขท้ายเบอร์โทร 4 หลัก</ModalHeader>
+              <ModalCloseButton />
+              <ModalBody pb={8}>
+                <HStack>
+                  <PinInput onChange={(e) => onCompletePin(e)}
+                  onComplete={(e) => onCompletePin(e)}>
+                    <PinInputField />
+                    <PinInputField />
+                    <PinInputField />
+                    <PinInputField />
+                  </PinInput>
+                </HStack>
+              </ModalBody>
+            </ModalContent>
+          </Modal>
 
           <Stack
             align={"center"}
@@ -238,13 +285,73 @@ function CustomerStatus() {
                         {/* <Td>{row.twitter}</Td> */}
                         <Td>{row.member}</Td>
                         <Td>{row.random}</Td>
-                        <Td>{row.price}</Td>
-                        <Td>{row.status}</Td>
+                        <Td>
+                          <b>{row.price}</b>
+                        </Td>
+                        <Td>{statusMapped(row.status)}</Td>
                       </Tr>
                     ))}
                   </Tbody>
                 </Table>
               </TableContainer>
+
+              <Stack textAlign={"left"} gap={1} py={5} px={2}>
+                <Text
+                  fontWeight={800}
+                  as={"span"}
+                  position={"relative"}
+                  _after={{
+                    content: "''",
+                    width: "90px",
+                    height: "30%",
+                    position: "absolute",
+                    bottom: 1,
+                    left: 0,
+                    bg: "blue.100",
+                    zIndex: -1,
+                  }}
+                >
+                  📦ที่อยู่จัดส่ง
+                </Text>
+                {displayData.map((row, index) =>
+                  row.address ? (
+                    <div key={index}>
+                      <Text fontSize={"14px"} color="gray.800">
+                        จัดส่ง {row.shipping}
+                      </Text>
+                      <Stack direction={"row"} align={"center"}>
+                        <Text fontSize={"14px"} fontWeight={800}>
+                          {row.name}
+                        </Text>
+                        <Text fontSize={"12px"} color="gray.500">
+                          ({row.phone})
+                        </Text>
+                      </Stack>
+                      <Text fontSize={"14px"}>{row.address}</Text>
+                    </div>
+                  ) : (
+                    <Text fontSize={"14px"}>-</Text>
+                  )
+                )}
+              </Stack>
+              <Spacer />
+              <Alert
+                status="info"
+                variant="subtle"
+                flexDirection="column"
+                alignItems="center"
+                justifyContent="center"
+                textAlign="center"
+                //   height='200px'
+              >
+                <AlertIcon boxSize="40px" mr={0} />
+                <AlertTitle mt={4} mb={1} fontSize="lg">
+                  สถานะสินค้า
+                </AlertTitle>
+                <AlertDescription maxWidth="sm">
+                  รอกดของ 10:00 26 ตุลาคม
+                </AlertDescription>
+              </Alert>
             </Box>
 
             <Accordion allowMultiple width="100%" rounded="lg">
@@ -263,9 +370,6 @@ function CustomerStatus() {
                     aria-label={"ViewIcon"}
                     borderRadius={"20px"}
                   />
-
-                  {/* <Text fontSize="md">What is Chakra UI?</Text>
-              <ChevronDownIcon fontSize="24px" /> */}
                 </AccordionButton>
                 <AccordionPanel pb={4}>
                   <video controls>
@@ -401,7 +505,6 @@ function CustomerStatus() {
               <Box bg={useColorModeValue("gray.50", "gray.900")} px={6} py={5}>
                 <List spacing={0}>
                   <ListItem>
-                    {/* <ListIcon as={CheckIcon} color="green.400" /> */}
                     <Text color={"gray.800"} fontWeight={500}>
                       <Highlight
                         query={"1 เมมเบอร์"}
