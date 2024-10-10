@@ -117,24 +117,24 @@ function CustomerStatus() {
   };
 
   const onClickSearch = () => {
-    if (cusdata.find(e => e.twitter === inputStr.toLowerCase())) {
-        const filtered = cusdata.filter(arr => {
-            if (arr.twitter.includes(inputStr)) {
-                return arr
-            }
-            console.log('arr', )
-            // arr.twitter.includes(inputStr)
-        });
-        console.log('filtered',filtered)
-        setDisplayData(filtered)
-        console.log('displayData',displayData)
-        setTogglePanel(true)
-        setErrorPanel(false)
+    if (cusdata.find((e) => e.twitter === inputStr.toLowerCase())) {
+      const filtered = cusdata.filter((arr) => {
+        if (arr.twitter.includes(inputStr)) {
+          return arr;
+        }
+        console.log("arr");
+        // arr.twitter.includes(inputStr)
+      });
+      console.log("filtered", filtered);
+      setDisplayData(filtered);
+      console.log("displayData", displayData);
+      setTogglePanel(true);
+      setErrorPanel(false);
     } else {
-        setTogglePanel(false)
-        setErrorPanel(true)
+      setTogglePanel(false);
+      setErrorPanel(true);
     }
-  }
+  };
 
   return (
     <>
@@ -159,7 +159,7 @@ function CustomerStatus() {
           </Heading>
 
           {/* TODO: INPUT  */}
-          <Stack >
+          <Stack>
             <Input
               width={"100%"}
               placeholder="กรอก Account Twitter มี @ เช่น @purtaple"
@@ -172,24 +172,29 @@ function CustomerStatus() {
               alignSelf={"center"}
               position={"relative"}
             >
-              <Button onClick={onClickSearch} colorScheme="purtaple" rounded={"full"} px={6}>
+              <Button
+                onClick={onClickSearch}
+                colorScheme="purtaple"
+                rounded={"full"}
+                px={6}
+              >
                 ค้นหา
               </Button>
             </Stack>
           </Stack>
-{
-    errorPanel && (
-<Box backgroundColor="red.50" py={4} borderRadius={'10px'}>
-    <Text color={"red.800"} fontWeight={500}>
-    ไม่พบชื่อผู้ใช้นี้
-                  </Text>
-                
-    </Box>
-    )
-}
-    
+          {errorPanel && (
+            <Box backgroundColor="red.50" py={4} borderRadius={"10px"}>
+              <Text color={"red.800"} fontWeight={500}>
+                ไม่พบชื่อผู้ใช้นี้
+              </Text>
+            </Box>
+          )}
 
-          <Stack align={"center"} alignSelf={"center"} display={togglePanel ? 'contents' : 'none'}>
+          <Stack
+            align={"center"}
+            alignSelf={"center"}
+            display={togglePanel ? "contents" : "none"}
+          >
             <Text color={"purtaple.500"} fontSize="3xl" fontWeight={600}>
               <Highlight
                 query={"[หาร]"}
@@ -229,48 +234,6 @@ function CustomerStatus() {
                   </Tbody>
                 </Table>
               </TableContainer>
-            </Box>
-
-            <Box
-              // maxW={'330px'}
-              w={"full"}
-              bg={useColorModeValue("white", "gray.800")}
-              // boxShadow={'2xl'}
-              rounded={"md"}
-              overflow={"hidden"}
-            >
-              <Box bg={useColorModeValue("gray.50", "gray.900")} px={6} py={5}>
-                <List spacing={0}>
-                  <ListItem>
-                    {/* <ListIcon as={CheckIcon} color="green.400" /> */}
-                    <Text color={"gray.800"} fontWeight={500}>
-                      <Highlight
-                        query={"1 เมมเบอร์"}
-                        styles={{
-                          px: "2",
-                          py: "1",
-                          rounded: "full",
-                          bg: "teal.100",
-                        }}
-                      >
-                        1 เมมเบอร์จะได้
-                      </Highlight>
-                    </Text>
-                  </ListItem>
-                  <ListItem>
-                    <ListIcon as={CheckIcon} color="green.400" />
-                    PHOTOCARD (ตามเมม) 1 ใบ
-                  </ListItem>
-                  <ListItem>
-                    <ListIcon as={CheckIcon} color="green.400" />
-                    PASSPORT 1 ใบ
-                  </ListItem>
-                  <ListItem>
-                    <ListIcon as={CheckIcon} color="green.400" />
-                    ENTRANCE TICKET 1 ใบ
-                  </ListItem>
-                </List>
-              </Box>
             </Box>
 
             <Accordion allowMultiple width="100%" rounded="lg">
@@ -319,31 +282,144 @@ function CustomerStatus() {
                   />
                 </AccordionButton>
                 <AccordionPanel pb={4}>
-                <Stack
-              direction={"column"}
-              spacing={3}
-              align={"center"}
-              alignSelf={"center"}
-              position={"relative"}
-            >
-                <Box bg="purtaple.100" px={3} py={1} borderRadius={'10px'}>
-                <Stack direction={"row"} align={"center"}>
-                <Text color={"purtaple.950"} fontWeight={500}>
-                    พร้อมเพย์ 098-274-3171
-</Text>
-                                    <Button colorScheme="purtaple" variant="ghost" rightIcon={<CopyIcon />} onClick={() => {
-                                        navigator.clipboard.writeText("0982743171")
-                                    }}>
-                                    
-                    คัดลอก
-                    </Button>
-                    </Stack>
+                  <Stack
+                    direction={"column"}
+                    spacing={3}
+                    align={"center"}
+                    alignSelf={"center"}
+                    position={"relative"}
+                  >
+                    <Heading fontSize={{ sm: "xl", lg: "2xl" }}>
+                      <Text
+                        as={"span"}
+                        position={"relative"}
+                        _after={{
+                          content: "''",
+                          width: "full",
+                          height: "30%",
+                          position: "absolute",
+                          bottom: 1,
+                          left: 0,
+                          bg: "blue.100",
+                          zIndex: -1,
+                        }}
+                      >
+                        📮ค่าส่งไปรษณีย์ไทย
+                      </Text>
+                    </Heading>
+
+                    <Box
+                      borderColor="blue.100"
+                      borderWidth="2px"
+                      px={5}
+                      py={2}
+                      borderRadius={"10px"}
+                    >
+                      <Text color={"purtaple.950"} fontWeight={500}>
+                        ลงทะเบียน: 30฿
+                        <br />
+                        EMS: 50฿
+                      </Text>
+                    </Box>
+                    <Spacer />
+                    <Heading fontSize={{ sm: "xl", lg: "2xl" }}>
+                      <Text
+                        as={"span"}
+                        position={"relative"}
+                        _after={{
+                          content: "''",
+                          width: "full",
+                          height: "30%",
+                          position: "absolute",
+                          bottom: 1,
+                          left: 0,
+                          bg: "purtaple.300",
+                          zIndex: -1,
+                        }}
+                      >
+                        💸เลขบัญชี
+                      </Text>
+                    </Heading>
+
+                    <Box bg="purtaple.100" px={3} py={1} borderRadius={"10px"} sx={{zIndex: -2}}>
+                      <Stack direction={"row"} align={"center"}>
+                        <Text color={"purtaple.950"} fontWeight={500}>
+                          พร้อมเพย์ 098-274-3171
+                        </Text>
+                        <Button
+                          colorScheme="purtaple"
+                          variant="ghost"
+                          rightIcon={<CopyIcon />}
+                          onClick={() => {
+                            navigator.clipboard.writeText("0982743171");
+                          }}
+                        >
+                          คัดลอก
+                        </Button>
+                      </Stack>
                     </Box>
                     <img src={qrPtp} width="400px" alt="qrPtp" />
-                    </Stack>
+
+                    <Text color={"purtaple.950"} fontWeight={500}>
+                      ชำระแล้วให้แจ้งสลิป + ชื่อที่อยู่ใน dm ได้เลยค่า
+                    </Text>
+                    <Box
+                      backgroundColor="red.50"
+                      px={4}
+                      py={2}
+                      width="100%"
+                      borderRadius={"10px"}
+                    >
+                      <Text color={"red.800"} fontWeight={500}>
+                        ชำระได้ถึง ~24 ต.ค.
+                      </Text>
+                    </Box>
+                  </Stack>
                 </AccordionPanel>
               </AccordionItem>
             </Accordion>
+
+            <Box
+              // maxW={'330px'}
+              w={"full"}
+              bg={useColorModeValue("white", "gray.800")}
+              // boxShadow={'2xl'}
+              rounded={"md"}
+              overflow={"hidden"}
+            >
+              <Box bg={useColorModeValue("gray.50", "gray.900")} px={6} py={5}>
+                <List spacing={0}>
+                  <ListItem>
+                    {/* <ListIcon as={CheckIcon} color="green.400" /> */}
+                    <Text color={"gray.800"} fontWeight={500}>
+                      <Highlight
+                        query={"1 เมมเบอร์"}
+                        styles={{
+                          px: "2",
+                          py: "1",
+                          rounded: "full",
+                          bg: "teal.100",
+                        }}
+                      >
+                        1 เมมเบอร์จะได้
+                      </Highlight>
+                    </Text>
+                  </ListItem>
+                  <ListItem>
+                    <ListIcon as={CheckIcon} color="green.400" />
+                    PHOTOCARD (ตามเมม) 1 ใบ
+                  </ListItem>
+                  <ListItem>
+                    <ListIcon as={CheckIcon} color="green.400" />
+                    PASSPORT 1 ใบ
+                  </ListItem>
+                  <ListItem>
+                    <ListIcon as={CheckIcon} color="green.400" />
+                    ENTRANCE TICKET 1 ใบ
+                  </ListItem>
+                </List>
+              </Box>
+            </Box>
             <img src={img} alt="mbr_collection-c" />
           </Stack>
         </Stack>
