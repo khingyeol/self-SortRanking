@@ -74,6 +74,7 @@ import React, { useEffect, useState } from "react";
 // @ts-ignore
 import randomVideo from "assets/mbr/mbr_random.mp4";
 import crocs_img from "assets/crocs_img.jpg";
+import crocs_all from "assets/crocs_all.jpeg";
 import {
   CheckIcon,
   ChevronDownIcon,
@@ -347,6 +348,7 @@ function CustomerStatus() {
                 </AccordionPanel>
               </AccordionItem>
             </Accordion>
+            <img src={crocs_all} alt="crocs_all" />
         </>;
       default:
         return <></>;
