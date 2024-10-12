@@ -68,12 +68,12 @@ import {
   ModalOverlay,
   PinInput,
   PinInputField,
+  AccordionIcon,
 } from "@chakra-ui/react";
 import React, { useEffect, useState } from "react";
-import { ReactComponent as TwitterIcon } from "assets/twitter.svg";
+// @ts-ignore
 import randomVideo from "assets/mbr/mbr_random.mp4";
-import img from "assets/mbr/mbr_collection-c.png";
-import qrPtp from "assets/mbr/qr_ptp.JPG";
+import crocs_img from "assets/crocs_img.jpg";
 import {
   CheckIcon,
   ChevronDownIcon,
@@ -81,8 +81,13 @@ import {
   DeleteIcon,
   EditIcon,
   InfoOutlineIcon,
+  StarIcon,
   ViewIcon,
 } from "@chakra-ui/icons";
+import PaymentDetail from "./Components/PaymentDetail";
+import MbrItems from "./Components/MbrItems";
+import Footer from "./Components/Footer";
+import Address from "./Components/Address";
 
 function CustomerStatus() {
   const csvUrl =
@@ -93,7 +98,7 @@ function CustomerStatus() {
   const [togglePanel, setTogglePanel] = useState(false);
   const [errorPanel, setErrorPanel] = useState(false);
   const [pwPanel, setPwPanel] = useState(false);
-  const [onLoad, setOnLoad] = useState(true)
+  const [onLoad, setOnLoad] = useState(true);
 
   const initialRef = React.useRef(null);
   const finalRef = React.useRef(null);
@@ -127,14 +132,16 @@ function CustomerStatus() {
   };
 
   const onClickSearch = () => {
-    if (cusdata.find((e) => e.twitter === inputStr.toLowerCase())) {
+    // const twitterAcc = e.twitter.toLowerCase()
+    const inputAcc = inputStr.toLowerCase()
+    if (cusdata.find((e) => e.twitter.toLowerCase() === inputAcc)) {
       const filtered = cusdata.filter((arr) => {
-        if (arr.twitter.includes(inputStr)) {
+        if (arr.twitter.toLowerCase().includes(inputAcc)) {
           return arr;
         }
       });
       setDisplayData(filtered);
-
+      console.log('filtered',filtered)
       if (filtered[0].phone) {
         setPwPanel(true);
         setErrorPanel(false);
@@ -150,28 +157,215 @@ function CustomerStatus() {
   };
 
   const statusMapped = (status) => {
-    if (status === "ชำระแล้ว") {
-      return <Tag bgColor="teal.100">{status}</Tag>;
-    } else if (status === "ยังไม่ชำระ") {
-      return <Tag bgColor="red.100">{status}</Tag>;
-    } else {
-      return <></>;
+    switch (status) {
+      case "ชำระแล้ว":
+        return <Tag bgColor="teal.100">{status}</Tag>;
+      case "ยังไม่ชำระ":
+        return <Tag bgColor="red.100">{status}</Tag>;
+      default:
+        return <></>;
+    }
+  };
+
+  const productTypeMapped = (type) => {
+    switch (type) {
+      case "mbr":
+        return "เมืองโบราณ set C";
+      case "crocs":
+        return "หารการ์ด crocs";
+      default:
+        return "";
+    }
+  };
+
+  const accordianPanelDisplay = (type) => {
+    switch (type) {
+      case "mbr":
+        return (
+          <>
+            <Stack textAlign={"left"} gap={1} py={5} px={2}>
+              <Address displayData={displayData} />
+            </Stack>
+
+            <Alert
+              status="info"
+              variant="subtle"
+              flexDirection="column"
+              alignItems="center"
+              justifyContent="center"
+              textAlign="center"
+            >
+              <AlertIcon boxSize="40px" mr={0} />
+              <AlertTitle mt={4} mb={1} fontSize="lg">
+                สถานะสินค้า
+              </AlertTitle>
+              <AlertDescription maxWidth="sm">
+                รอกดของ 10:00 | 26 ตุลาคม
+              </AlertDescription>
+            </Alert>
+
+            <Accordion
+              pt={2}
+              allowMultiple
+              width="100%"
+              rounded="lg"
+            >
+              <AccordionItem border="none" my={2}>
+                <AccordionButton
+                  // display={'none'}
+                  display="flex"
+                  alignItems="center"
+                  justifyContent="space-between"
+                  bgColor={"white"}
+                  borderRadius={"lg"}
+                  p={2}
+                >
+                  <Text color={"gray.700"} fontWeight={500}>
+                    หลักฐานการสุ่มการ์ด,โปสเตอร์
+                  </Text>
+                  <IconButton
+                    icon={<ViewIcon />}
+                    aria-label={"ViewIcon"}
+                    borderRadius={"20px"}
+                  />
+                </AccordionButton>
+                <AccordionPanel pb={4}>
+                  <video controls>
+                    <source src={randomVideo} type="video/mp4" />
+                  </video>
+                </AccordionPanel>
+              </AccordionItem>
+              <AccordionItem border="none" my={2}>
+                <AccordionButton
+                  display="flex"
+                  alignItems="center"
+                  justifyContent="space-between"
+                  bgColor={"white"}
+                  borderRadius={"lg"}
+                  p={2}
+                >
+                  <Text color={"gray.700"} fontWeight={500}>
+                    ช่องทางการโอนเงิน
+                  </Text>
+                  <Text color={"gray.500"} fontWeight={500}>
+                    ชำระได้ถึง ~24 ต.ค.
+                  </Text>
+                  <IconButton
+                    icon={<InfoOutlineIcon />}
+                    aria-label={"InfoOutlineIcon"}
+                    borderRadius={"20px"}
+                  />
+                </AccordionButton>
+                <AccordionPanel pb={4}>
+                  {/* - ช่องทางการโอนเงิน - */}
+                  <PaymentDetail date="24 ต.ค." regis={"30฿"} ems={"50฿"} />
+                </AccordionPanel>
+              </AccordionItem>
+            </Accordion>
+            <MbrItems />
+          </>
+        );
+      case "crocs":
+        return <>
+                    <Stack textAlign={"left"} gap={1} py={5} px={2}>
+              <Address displayData={displayData} />
+            </Stack>
+
+            <Alert
+              status="info"
+              variant="subtle"
+              flexDirection="column"
+              alignItems="center"
+              justifyContent="center"
+              textAlign="center"
+              borderRadius={'lg'}
+            // bgColor={'#B7E0FF'}
+            >
+              <AlertIcon boxSize="40px" mr={0} />
+              <AlertTitle mt={4} mb={1} fontSize="lg">
+                สถานะสินค้า
+              </AlertTitle>
+              <AlertDescription maxWidth="sm">
+              ✅หิ้วแล้ว✅ รอส่งกลับ<br />
+              <br />
+              <b>เมมเบอร์ที่ยังว่าง:</b> ฮยอนซอก, จีฮุน,​โดยอง จองฮวาน
+              </AlertDescription>
+            </Alert>
+            <Accordion
+              pt={2}
+              allowMultiple
+              width="100%"
+              rounded="lg"
+            >
+              <AccordionItem border="none" my={2}>
+                <AccordionButton
+                  // display={'none'}
+                  display="flex"
+                  alignItems="center"
+                  justifyContent="space-between"
+                  bgColor={"white"}
+                  borderRadius={"lg"}
+                  p={2}
+                >
+                  <Text color={"gray.700"} fontWeight={500}>
+                    หลักฐานการหิ้ว
+                  </Text>
+                  <IconButton
+                    icon={<ViewIcon />}
+                    aria-label={"ViewIcon"}
+                    borderRadius={"20px"}
+                  />
+                </AccordionButton>
+                <AccordionPanel pb={4}>
+                <img src={crocs_img} width="400px" alt="crocs_img" />
+                </AccordionPanel>
+              </AccordionItem>
+              <AccordionItem border="none" my={2}>
+                <AccordionButton
+                  display="flex"
+                  alignItems="center"
+                  justifyContent="space-between"
+                  bgColor={"white"}
+                  borderRadius={"lg"}
+                  p={2}
+                >
+                  <Text color={"gray.700"} fontWeight={500}>
+                    ช่องทางการโอนเงิน
+                  </Text>
+                  {/* <Text color={"gray.500"} fontWeight={500}>
+                    ชำระได้ถึง ~24 ต.ค.
+                  </Text> */}
+                  <IconButton
+                    icon={<InfoOutlineIcon />}
+                    aria-label={"InfoOutlineIcon"}
+                    borderRadius={"20px"}
+                  />
+                </AccordionButton>
+                <AccordionPanel pb={4}>
+                  {/* - ช่องทางการโอนเงิน - */}
+                  <PaymentDetail date="ไม่มีกำหนด" regis={"30฿"} ems={"50฿"} />
+                </AccordionPanel>
+              </AccordionItem>
+            </Accordion>
+        </>;
+      default:
+        return <></>;
     }
   };
 
   const onCompletePin = (value) => {
-    const pw = displayData[0].phone
+    const pw = displayData[0].phone;
     if (value.length > 3) {
-        if (pw.includes(value)) {
-            setPwPanel(false);
-            setTogglePanel(true);
-            setErrorPanel(false)
-        } else {
-            setPwPanel(false);
-            setErrorPanel(true)
-        }
+      if (pw.includes(value)) {
+        setPwPanel(false);
+        setTogglePanel(true);
+        setErrorPanel(false);
+      } else {
+        setPwPanel(false);
+        setErrorPanel(true);
+      }
     }
-  }
+  };
   return (
     <>
       <Container maxW={"3xl"}>
@@ -209,7 +403,7 @@ function CustomerStatus() {
               position={"relative"}
             >
               <Button
-              isLoading={onLoad}
+                isLoading={onLoad}
                 onClick={onClickSearch}
                 colorScheme="purtaple"
                 rounded={"full"}
@@ -234,13 +428,15 @@ function CustomerStatus() {
             isCentered
           >
             <ModalOverlay />
-            <ModalContent alignItems={'center'} >
+            <ModalContent alignItems={"center"}>
               <ModalHeader>กรอกเลขท้ายเบอร์โทร 4 หลัก</ModalHeader>
               <ModalCloseButton />
               <ModalBody pb={8}>
                 <HStack>
-                  <PinInput onChange={(e) => onCompletePin(e)}
-                  onComplete={(e) => onCompletePin(e)}>
+                  <PinInput
+                    onChange={(e) => onCompletePin(e)}
+                    onComplete={(e) => onCompletePin(e)}
+                  >
                     <PinInputField />
                     <PinInputField />
                     <PinInputField />
@@ -256,7 +452,8 @@ function CustomerStatus() {
             alignSelf={"center"}
             display={togglePanel ? "contents" : "none"}
           >
-            <Text color={"purtaple.500"} fontSize="3xl" fontWeight={600}>
+            {/* display NONE */}
+            <Text color={"purtaple.500"} fontSize="3xl" fontWeight={600} display={'none'}>
               <Highlight
                 query={"[หาร]"}
                 styles={{
@@ -271,6 +468,46 @@ function CustomerStatus() {
             </Text>
 
             <Box>
+              <Accordion allowToggle width="100%">
+                {displayData.map((row, index) => (
+                  <AccordionItem key={`acc-${index}`} border="none">
+                    <AccordionButton
+                      _expanded={{ bg: "" }}
+                      display="flex"
+                      justifyContent="space-between"
+                      p={2}
+                    >
+                      <Card variant={"outline"} width="100%" bg={"transparent"}>
+                        <CardHeader pb={0}>
+                          <Box display={"flex"}>
+                            <StarIcon color="blue.200" />
+                            <Heading size="sm" textAlign={"left"}>
+                              {productTypeMapped(row.type)}
+                            </Heading>
+                            <AccordionIcon ml={"auto"} />
+                          </Box>
+                        </CardHeader>
+                        <CardBody>
+                          <Grid templateColumns="repeat(4, 1fr)" gap={1}>
+                            <Text>{row.member}</Text>
+                            <Text>{row.random}</Text>
+                            <Text>
+                              <b>฿ {row.price}</b>
+                            </Text>
+                            <Text>{statusMapped(row.status)}</Text>
+                          </Grid>
+                        </CardBody>
+                      </Card>
+                    </AccordionButton>
+                    <AccordionPanel bgColor={"purtaple.50"} borderRadius={"lg"}>
+                      {accordianPanelDisplay(row.type)}
+                    </AccordionPanel>
+                  </AccordionItem>
+                ))}
+              </Accordion>
+            </Box>
+
+            <Box display={"none"}>
               <TableContainer>
                 <Table size="sm">
                   <Thead>
@@ -297,294 +534,15 @@ function CustomerStatus() {
                   </Tbody>
                 </Table>
               </TableContainer>
-
-              <Stack textAlign={"left"} gap={1} py={5} px={2}>
-                <Text
-                  fontWeight={800}
-                  as={"span"}
-                  position={"relative"}
-                  _after={{
-                    content: "''",
-                    width: "90px",
-                    height: "30%",
-                    position: "absolute",
-                    bottom: 1,
-                    left: 0,
-                    bg: "blue.100",
-                    zIndex: -1,
-                  }}
-                >
-                  📦ที่อยู่จัดส่ง
-                </Text>
-                {displayData.map((row, index) =>
-                  row.address ? (
-                    <div key={index}>
-                      <Text fontSize={"14px"} color="gray.800">
-                        จัดส่ง {row.shipping}
-                      </Text>
-                      <Stack direction={"row"} align={"center"}>
-                        <Text fontSize={"14px"} fontWeight={800}>
-                          {row.name}
-                        </Text>
-                        <Text fontSize={"12px"} color="gray.500">
-                          ({row.phone})
-                        </Text>
-                      </Stack>
-                      <Text fontSize={"14px"}>{row.address}</Text>
-                    </div>
-                  ) : (
-                    <Text fontSize={"14px"}>-</Text>
-                  )
-                )}
-              </Stack>
               <Spacer />
-              <Alert
-                status="info"
-                variant="subtle"
-                flexDirection="column"
-                alignItems="center"
-                justifyContent="center"
-                textAlign="center"
-                //   height='200px'
-              >
-                <AlertIcon boxSize="40px" mr={0} />
-                <AlertTitle mt={4} mb={1} fontSize="lg">
-                  สถานะสินค้า
-                </AlertTitle>
-                <AlertDescription maxWidth="sm">
-                  รอกดของ 10:00 26 ตุลาคม
-                </AlertDescription>
-              </Alert>
             </Box>
 
-            <Accordion allowMultiple width="100%" rounded="lg">
-              <AccordionItem>
-                <AccordionButton
-                  display="flex"
-                  alignItems="center"
-                  justifyContent="space-between"
-                  p={2}
-                >
-                  <Text color={"gray.700"} fontWeight={500}>
-                    หลักฐานการสุ่มการ์ด,โปสเตอร์
-                  </Text>
-                  <IconButton
-                    icon={<ViewIcon />}
-                    aria-label={"ViewIcon"}
-                    borderRadius={"20px"}
-                  />
-                </AccordionButton>
-                <AccordionPanel pb={4}>
-                  <video controls>
-                    <source src={randomVideo} type="video/mp4" />
-                  </video>
-                </AccordionPanel>
-              </AccordionItem>
-              <AccordionItem>
-                <AccordionButton
-                  display="flex"
-                  alignItems="center"
-                  justifyContent="space-between"
-                  p={2}
-                >
-                  <Text color={"gray.700"} fontWeight={500}>
-                    ช่องทางการโอนเงิน
-                  </Text>
-                  <Text color={"gray.500"} fontWeight={500}>
-                    ชำระได้ถึง ~24 ต.ค.
-                  </Text>
-                  <IconButton
-                    icon={<InfoOutlineIcon />}
-                    aria-label={"InfoOutlineIcon"}
-                    borderRadius={"20px"}
-                  />
-                </AccordionButton>
-                <AccordionPanel pb={4}>
-                  <Stack
-                    direction={"column"}
-                    spacing={3}
-                    align={"center"}
-                    alignSelf={"center"}
-                    position={"relative"}
-                  >
-                    <Heading fontSize={{ sm: "xl", lg: "2xl" }}>
-                      <Text
-                        as={"span"}
-                        position={"relative"}
-                        _after={{
-                          content: "''",
-                          width: "full",
-                          height: "30%",
-                          position: "absolute",
-                          bottom: 1,
-                          left: 0,
-                          bg: "blue.100",
-                          zIndex: -1,
-                        }}
-                      >
-                        📮ค่าส่งไปรษณีย์ไทย
-                      </Text>
-                    </Heading>
-
-                    <Box
-                      borderColor="blue.100"
-                      borderWidth="2px"
-                      px={5}
-                      py={2}
-                      borderRadius={"10px"}
-                    >
-                      <Text color={"purtaple.950"} fontWeight={500}>
-                        ลงทะเบียน: 30฿
-                        <br />
-                        EMS: 50฿
-                      </Text>
-                    </Box>
-                    <Spacer />
-                    <Heading fontSize={{ sm: "xl", lg: "2xl" }}>
-                      <Text
-                        as={"span"}
-                        position={"relative"}
-                        _after={{
-                          content: "''",
-                          width: "full",
-                          height: "30%",
-                          position: "absolute",
-                          bottom: 1,
-                          left: 0,
-                          bg: "purtaple.300",
-                          zIndex: -1,
-                        }}
-                      >
-                        💸เลขบัญชี
-                      </Text>
-                    </Heading>
-
-                    <Box bg="purtaple.100" px={3} py={1} borderRadius={"10px"}>
-                      <Stack direction={"row"} align={"center"}>
-                        <Text color={"purtaple.950"} fontWeight={500}>
-                          พร้อมเพย์ 098-274-3171
-                        </Text>
-                        <Button
-                          colorScheme="purtaple"
-                          variant="ghost"
-                          rightIcon={<CopyIcon />}
-                          onClick={() => {
-                            navigator.clipboard.writeText("0982743171");
-                          }}
-                        >
-                          คัดลอก
-                        </Button>
-                      </Stack>
-                    </Box>
-                    <img src={qrPtp} width="400px" alt="qrPtp" />
-
-                    <Text color={"purtaple.950"} fontWeight={500}>
-                      ชำระแล้วให้แจ้งสลิป + ชื่อที่อยู่ใน dm ได้เลยค่า
-                    </Text>
-                    <Box
-                      backgroundColor="red.50"
-                      px={4}
-                      py={2}
-                      width="100%"
-                      borderRadius={"10px"}
-                    >
-                      <Text color={"red.800"} fontWeight={500}>
-                        ชำระได้ถึง ~24 ต.ค.
-                      </Text>
-                    </Box>
-                  </Stack>
-                </AccordionPanel>
-              </AccordionItem>
-            </Accordion>
-
-            <Box
-              // maxW={'330px'}
-              w={"full"}
-              bg={useColorModeValue("white", "gray.800")}
-              // boxShadow={'2xl'}
-              rounded={"md"}
-              overflow={"hidden"}
-            >
-              <Box bg={useColorModeValue("gray.50", "gray.900")} px={6} py={5}>
-                <List spacing={0}>
-                  <ListItem>
-                    <Text color={"gray.800"} fontWeight={500}>
-                      <Highlight
-                        query={"1 เมมเบอร์"}
-                        styles={{
-                          px: "2",
-                          py: "1",
-                          rounded: "full",
-                          bg: "teal.100",
-                        }}
-                      >
-                        1 เมมเบอร์จะได้
-                      </Highlight>
-                    </Text>
-                  </ListItem>
-                  <ListItem>
-                    <ListIcon as={CheckIcon} color="green.400" />
-                    PHOTOCARD (ตามเมม) 1 ใบ
-                  </ListItem>
-                  <ListItem>
-                    <ListIcon as={CheckIcon} color="green.400" />
-                    PASSPORT 1 ใบ
-                  </ListItem>
-                  <ListItem>
-                    <ListIcon as={CheckIcon} color="green.400" />
-                    ENTRANCE TICKET 1 ใบ
-                  </ListItem>
-                </List>
-              </Box>
-            </Box>
-            <img src={img} alt="mbr_collection-c" />
+            {/* <MbrItems /> */}
           </Stack>
         </Stack>
       </Container>
-
-      <chakra.footer>
-        <Flex
-          direction="row"
-          gap={2}
-          pos="fixed"
-          bottom={0}
-          w="full"
-          px={6}
-          py={4}
-          align="center"
-          bg="white"
-        >
-          <Spacer />
-          <Button
-            borderRadius={"20px"}
-            leftIcon={<TwitterIcon width={"20px"} />}
-            colorScheme="purtaple"
-            variant="outline"
-            onClick={() => {
-              window.open("https://x.com/purtaple", "_blank").focus();
-            }}
-          >
-            purtaple
-          </Button>
-          <Button
-            borderRadius={"20px"}
-            colorScheme="purtaple"
-            variant="ghost"
-            onClick={() => {
-              window
-                .open(
-                  "https://x.com/intent/tweet?text=%23rv_purtaple%20",
-                  "_blank"
-                )
-                .focus();
-            }}
-          >
-            เขียนรีวิว #rv_purtaple
-          </Button>
-
-          <Spacer />
-        </Flex>
-      </chakra.footer>
+      {/* - FOOTER - */}
+      <Footer />
     </>
   );
 }
