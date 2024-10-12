@@ -477,9 +477,10 @@ function CustomerStatus() {
                       _expanded={{ bg: "" }}
                       display="flex"
                       justifyContent="space-between"
-                      p={2}
+                      py={2}
+                      px={0}
                     >
-                      <Card variant={"outline"} width="100%" bg={"transparent"}>
+                      <Card variant={"outline"} width="100%" bg={"transparent"} p={{sm: 0, md: 2}}>
                         <CardHeader pb={0}>
                           <Box display={"flex"}>
                             <StarIcon color="blue.200" />
@@ -489,10 +490,10 @@ function CustomerStatus() {
                             <AccordionIcon ml={"auto"} />
                           </Box>
                         </CardHeader>
-                        <CardBody>
+                        <CardBody px={{sm: 1, md: 2}}>
                           <Grid templateColumns="repeat(4, 1fr)" gap={1}>
-                            <Text>{row.member}</Text>
-                            <Text>{row.random}</Text>
+                            <Text  sx={{textWrap: 'balance'}} fontSize={{sm: 14, md: 16}}>{row.member}</Text>
+                           <Text>{row.random}</Text>
                             <Text>
                               <b>฿ {row.price}</b>
                             </Text>
