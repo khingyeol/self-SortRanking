@@ -287,8 +287,10 @@ function CustomerStatus() {
                 สถานะสินค้า
               </AlertTitle>
               <AlertDescription maxWidth="sm">
-              ✅หิ้วแล้ว✅ รอส่งกลับ<br />
-              <br />
+                {String.fromCodePoint(0xfe0f)}
+              ✈️ รอของถึงไทย <br />
+              ถึงไทยประมาณ <b>18-22 Oct</b>
+              <br /><br />
               <b>เมมเบอร์ที่ยังว่าง:</b> ฮยอนซอก, จีฮุน,​โดยอง จองฮวาน
               </AlertDescription>
             </Alert>
