@@ -30,6 +30,10 @@ import {
   Avatar,
 } from "@chakra-ui/react";
 import React, { useEffect, useState } from "react";
+import postWvs from "assets/post_wvs.png";
+import postIns from "assets/post_ins.png";
+import postTwt from "assets/post_twt.png";
+
 
 const DaysConverter = (num) => {
   if (num < 2) {
@@ -138,13 +142,13 @@ function CountdownSuk() {
               fontFamily="Afacad Flux"
               fontWeight={500}
             >{weverseTime.toDateString()}</Text>
-              <video controls>
+              {/* <video controls>
                 <source
                   src="https://weverse-rmcnmv.akamaized.net/c/read/v2/VOD_ALPHA/weverse-moment_2024_09_23_0/806ef932-799c-11ef-9ae8-b4055da54aa7.mp4?__gda__=1729358334_804dc6323aa0d33dac31b83f8a027d7a"
                   type="video/mp4"
                 />
-              </video>
-              {/* <Image  /> */}
+              </video> */}
+              <Image src={postWvs} />
             </Box>
             {/* <Text position={"absolute"} bottom={20} fontSize="xl">
               since Hyunsuk latest post on Weverse..{" "}
@@ -180,7 +184,7 @@ function CountdownSuk() {
               fontFamily="Afacad Flux"
               fontWeight={500}
             >{twitTime.toDateString()}</Text>
-              {TwitterPost()}
+              <Image src={postTwt} />
             </Box>
             {/* <Text position={"absolute"} bottom={20} fontSize="xl">
               since Hyunsuk latest post on Weverse..{" "}
@@ -209,12 +213,13 @@ function CountdownSuk() {
               fontWeight={500}
             >
                 {instaTime.toDateString()}</Text>
-              <iframe
+                <Image src={postIns} />
+              {/* <iframe
                 src="https://www.instagram.com/p/C-u3U3UP1pY/embed"
                 width="calc(100% - 2px)"
                 scrolling="no"
                 height="540"
-              ></iframe>
+              ></iframe> */}
             </Box>
           </Flex>
         </SimpleGrid>
