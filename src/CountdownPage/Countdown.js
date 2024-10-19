@@ -93,22 +93,9 @@ const FindDiffTime = (date) => {
     var hours = Math.floor((diffTime % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
     var minutes = Math.floor((diffTime % (1000 * 60 * 60)) / (1000 * 60));
     var seconds = Math.floor((diffTime % (1000 * 60)) / 1000);
-    var time = hours + " hours " + minutes + " minutes " + seconds + " seconds";
-    var allText = `${days} ${DaysConverter(days)} ${time}`
+    var time = hours + " hours\n" + minutes + " minutes\n" + seconds + " seconds";
+    var allText = `${days} ${DaysConverter(days)}\n ${time}`
     return allText
-}
-
-const subString = (string) => {
-  // for (int len = )
-  // va
-  return (
-    "Hello"
-    // string.replace(/\W*(Days)\W*/"eiei")
-    // <>
-    // 2 Days<br />
-    // 2 Hours
-    // </>
-  )
 }
 
 function Countdown() {
@@ -117,6 +104,11 @@ function Countdown() {
   
     let weverseTime = new Date(weversePost);
     let instaTime = new Date(igPost);
+
+    const color_bg = '#292929'
+    const color_text = "#f7f7f7"
+    const color_red = "#d8403a"
+    const color_purple = "#7f7ffc"
     
     const [ctime, setCtime] = useState('');
     const [itime, setItime] = useState('');
@@ -131,12 +123,12 @@ function Countdown() {
       setInterval(UpdateTime, 100);
   return (
     <>
-      <div textAlign="center">
+      <div textAlign="center" style={{backgroundColor: color_bg}}>
         {/* <Container textAlign="center"> */}
-          <Text fontSize="6xl" color='red' fontWeight='bold' textAlign='center'>MISSING</Text>
+          <Text fontSize="6xl" color={color_red} fontWeight='bold' textAlign='center'>MISSING</Text>
           <SimpleGrid columns={2} spacing={10}>
             <Box textAlign='center' display='flex' flexDirection='column'>
-            <Text fontSize="3xl" fontFamily='Orbitron'>{subString(ctime)}</Text>
+            <Text color={color_text} fontSize="3xl" whiteSpace={'pre-wrap'} fontFamily='Orbitron'>{ctime}</Text>
             {/* <Text fontSize="3xl" fontFamily='Orbitron'>{ctime}</Text> */}
               <Text fontSize="xl">since Doyoung latest post on Weverse.. </Text>
               {/* <Tag size="lg" colorScheme="#00d6ae" borderRadius="full">
@@ -152,7 +144,7 @@ function Countdown() {
               <Image src="https://i.imgur.com/jLm7M6g.png" />
             </Box>
             <Box textAlign='center' display='flex' flexDirection='column'>
-            <Text fontSize="3xl" fontFamily='Orbitron'> <br />{itime}</Text>
+            <Text color={color_text} fontSize="3xl" whiteSpace={'pre-wrap'} fontFamily='Orbitron'>{itime}</Text>
 
               <Text fontSize="xl">
                 since Doyoung latest post on Instagram..{" "}

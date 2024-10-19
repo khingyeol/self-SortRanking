@@ -25,6 +25,7 @@ import { BrowserRouter, Routes, Route, createBrowserRouter, RouterProvider, useN
 import Countdown from "CountdownPage/Countdown";
 import TruzCustom from "TruzCustom/TruzCustom";
 import CustomerStatus from "CustomerStatus/CustomerStatus";
+import CountdownSuk from "CountdownPage/CountdownSuk";
 
 const theme = extendTheme({
   colors: {
@@ -60,10 +61,14 @@ const router = createBrowserRouter([
       }
     ]
   },
-  // {
-  //   path: "countdown",
-  //   Component: Countdown
-  // },
+  {
+    path: "countdown-dy",
+    Component: Countdown
+  },
+  {
+    path: "countdown-suk",
+    Component: CountdownSuk
+  },
   // {
   //   path: "truz-custom",
   //   Component: TruzCustom
@@ -95,7 +100,7 @@ function HomePage() {
     <>
       <div className="App">
         <header className="App-header">
-          <img src={img} className="App-logo" alt="logo" />
+          {/* <img src={img} className="App-logo" alt="logo" /> */}
           <Stack className="stack">
             <Heading as="h2">Hi, hello</Heading>
             <Text fontSize="2xl">
@@ -110,8 +115,8 @@ function HomePage() {
               <Button
                 size="lg"
                 padding="20px"
-                bgColor={"#89CFF0"}
-                onClick={() => onClickroute('countdown')}
+                bgColor={"#FFEE8C"}
+                onClick={() => onClickroute('countdown-dy')}
               >
                 📅 Doyoung Countdown
               </Button>
@@ -119,11 +124,31 @@ function HomePage() {
               <Button
                 size="lg"
                 padding="20px"
+                bgColor={"#7f7ffc"}
+                color={'white'}
+                onClick={() => onClickroute('countdown-suk')}
+              >
+                📅  Hyunsuk Countdown
+              </Button>
+              <Divider />
+              <Button
+                size="lg"
+                padding="20px"
+                bgColor={"#89CFF0"}
+                onClick={() => onClickroute('customer-status')}
+              >
+                📦 Customer Status
+              </Button>
+              {/* <Divider /> */}
+              {/* <Button
+                size="lg"
+                padding="20px"
                 bgColor={"#FFEE8C"}
                 onClick={() => onClickroute('truz-custom')}
               >
                 TRUZ Customize
-              </Button>
+              </Button> */}
+
               <Outlet />
               {/* <Button size="lg">ss</Button> */}
             </Stack>
