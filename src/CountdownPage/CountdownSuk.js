@@ -113,9 +113,11 @@ function CountdownSuk() {
     <>
       <div textAlign="center" style={{ backgroundColor: color_bg }}>
         {/* <Container textAlign="center"> */}
-        <Center>
+        <Center  py={10}>
             <Text
-          fontSize={{ sm: "4xl", md: "6xl" }}
+           
+            fontSize={{base: "35px", sm:"35px", md: "60px"}}
+        //   fontSize={{ sm: "120px", md: "6xl" }}
           color={color_red}
           fontWeight="bold"
           textAlign="center"
