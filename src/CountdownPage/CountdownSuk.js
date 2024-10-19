@@ -117,7 +117,7 @@ function CountdownSuk() {
           color={color_text}
           textAlign="center"
         >
-          <Flex
+          <Box
             alignItems={"start"}
             alignContent={"center"}
             height={{ sm: "600px", md: "620px" }}
@@ -142,25 +142,13 @@ function CountdownSuk() {
               fontFamily="Afacad Flux"
               fontWeight={500}
             >{weverseTime.toDateString()}</Text>
-              {/* <video controls>
-                <source
-                  src="https://weverse-rmcnmv.akamaized.net/c/read/v2/VOD_ALPHA/weverse-moment_2024_09_23_0/806ef932-799c-11ef-9ae8-b4055da54aa7.mp4?__gda__=1729358334_804dc6323aa0d33dac31b83f8a027d7a"
-                  type="video/mp4"
-                />
-              </video> */}
               <Image src={postWvs} />
             </Box>
-            {/* <Text position={"absolute"} bottom={20} fontSize="xl">
-              since Hyunsuk latest post on Weverse..{" "}
-            </Text> */}
-          </Flex>
+          </Box>
 
-          <Flex
-            //   alignItems={'start'}
-
+          <Box
             alignContent={"center"}
             height={{ sm: "560px", md: "620px" }}
-            // bgColor={"red"}
           >
             <Text
               fontSize="3xl"
@@ -171,11 +159,8 @@ function CountdownSuk() {
             >
               {ctime}
             </Text>
-            {/* <Text fontSize="3xl" fontFamily='Orbitron'>{ctime}</Text> */}
             <Box
               w={"800em"}
-              //   bgColor={"purple"}
-            //   display={"flex"}
               justifyContent={"center"}
             >
                 <Text
@@ -186,14 +171,9 @@ function CountdownSuk() {
             >{twitTime.toDateString()}</Text>
               <Image src={postTwt} />
             </Box>
-            {/* <Text position={"absolute"} bottom={20} fontSize="xl">
-              since Hyunsuk latest post on Weverse..{" "}
-            </Text> */}
-          </Flex>
-          <Flex
+          </Box>
+          <Box
             alignContent={"center"}
-            //  height={{ sm: "600px", md: "620px" }}
-            // bgColor={"red"}
           >
             <Text
               fontSize="3xl"
@@ -214,14 +194,8 @@ function CountdownSuk() {
             >
                 {instaTime.toDateString()}</Text>
                 <Image src={postIns} />
-              {/* <iframe
-                src="https://www.instagram.com/p/C-u3U3UP1pY/embed"
-                width="calc(100% - 2px)"
-                scrolling="no"
-                height="540"
-              ></iframe> */}
             </Box>
-          </Flex>
+          </Box>
         </SimpleGrid>
 
         {/* </Container> */}
