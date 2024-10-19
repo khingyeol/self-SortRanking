@@ -34,6 +34,10 @@ import postWvs from "assets/post_wvs.png";
 import postIns from "assets/post_ins.png";
 import postTwt from "assets/post_twt.png";
 
+const color_bg = "#292929";
+const color_text = "#f7f7f7";
+const color_red = "#d8403a";
+const color_purple = "#7f7ffc";
 
 const DaysConverter = (num) => {
   if (num < 2) {
@@ -56,6 +60,35 @@ const FindDiffTime = (date) => {
   return allText;
 };
 
+const ContentPost = (count, date, src) => {
+    return (
+        <Box textAlign='center' display='flex' flexDirection='row'>
+             <Text
+              fontSize="3xl"
+            //   w={"200em"}
+              whiteSpace={"pre-wrap"}
+              fontFamily="Afacad Flux"
+              fontWeight={700}
+            >
+              {count}
+            </Text>
+            <Box
+            //   w={"800em"}
+            width={{sm: "70%", md: "60%"}}
+              justifyContent={"center"}
+            >
+                 <Text
+              fontSize="2xl"
+              color={color_purple}
+              fontFamily="Afacad Flux"
+              fontWeight={500}
+            >{date}</Text>
+              <Image src={src} />
+            </Box>
+        </Box>
+    )
+}
+
 function CountdownSuk() {
   var igPost = "2024-08-16T13:20:25.000Z";
   var weversePost = "2024-09-23T11:10:00.000Z";
@@ -64,11 +97,6 @@ function CountdownSuk() {
   let weverseTime = new Date(weversePost);
   let instaTime = new Date(igPost);
   let twitTime = new Date(twitterPost);
-
-  const color_bg = "#292929";
-  const color_text = "#f7f7f7";
-  const color_red = "#d8403a";
-  const color_purple = "#7f7ffc";
 
   const [ctime, setCtime] = useState("");
   const [itime, setItime] = useState("");
@@ -80,35 +108,26 @@ function CountdownSuk() {
     setTwtime(FindDiffTime(twitTime));
   };
 
-  function TwitterPost() {
-    return (
-      <>
-        <iframe
-          loading="lazy"
-          //   width="100%"
-          height="100%"
-          src="https://platform.twitter.com/embed/Tweet.html?frame=false&hideCard=false&hideThread=false&id=1839688050127114427&theme=light"
-          style={{ height: "100%" }}
-          frameborder="0"
-          scrolling="no"
-        ></iframe>
-      </>
-    );
-  }
-
   setInterval(UpdateTime, 100);
   return (
     <>
       <div textAlign="center" style={{ backgroundColor: color_bg }}>
         {/* <Container textAlign="center"> */}
-        <Text
+        <Center>
+            <Text
           fontSize={{ sm: "4xl", md: "6xl" }}
           color={color_red}
           fontWeight="bold"
           textAlign="center"
+          pl={"50px"}
         >
+            
           MISSING
         </Text>
+        <Image width={"50px"} src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQKyfy7-31Zc5HwxXGRu31_LHhPbf6Igqp0eg&s" />
+
+        </Center>
+        
 
         <SimpleGrid
           padding={{ sm: 5, md: 20 }}
@@ -117,85 +136,13 @@ function CountdownSuk() {
           color={color_text}
           textAlign="center"
         >
-          <Box
-            alignItems={"start"}
-            alignContent={"center"}
-            height={{ sm: "600px", md: "620px" }}
-            // bgColor={"red"}
-          >
-            <Text
-              fontSize="3xl"
-              w={"200em"}
-              whiteSpace={"pre-wrap"}
-              fontFamily="Afacad Flux"
-              fontWeight={700}
-            >
-              {twtime}
-            </Text>
-            <Box
-              w={"800em"}
-              justifyContent={"center"}
-            >
-                 <Text
-              fontSize="2xl"
-              color={color_purple}
-              fontFamily="Afacad Flux"
-              fontWeight={500}
-            >{weverseTime.toDateString()}</Text>
-              <Image src={postWvs} />
-            </Box>
-          </Box>
+          {ContentPost(twtime, twitTime.toDateString(), postTwt)}
 
-          <Box
-            alignContent={"center"}
-            height={{ sm: "560px", md: "620px" }}
-          >
-            <Text
-              fontSize="3xl"
-              w={"200em"}
-              whiteSpace={"pre-wrap"}
-              fontFamily="Afacad Flux"
-              fontWeight={700}
-            >
-              {ctime}
-            </Text>
-            <Box
-              w={"800em"}
-              justifyContent={"center"}
-            >
-                <Text
-              fontSize="2xl"
-              color={color_purple}
-              fontFamily="Afacad Flux"
-              fontWeight={500}
-            >{twitTime.toDateString()}</Text>
-              <Image src={postTwt} />
-            </Box>
-          </Box>
-          <Box
-            alignContent={"center"}
-          >
-            <Text
-              fontSize="3xl"
-              w={"20rem"}
-              whiteSpace={"pre-wrap"}
-              fontFamily="Afacad Flux"
-              fontWeight={700}
-            >
-              {itime}
-            </Text>
+            {ContentPost(ctime, weverseTime.toDateString(), postWvs)}
+            {ContentPost(itime, instaTime.toDateString(), postIns)}
 
-            <Box>
-            <Text
-              fontSize="2xl"
-              color={color_purple}
-              fontFamily="Afacad Flux"
-              fontWeight={500}
-            >
-                {instaTime.toDateString()}</Text>
-                <Image src={postIns} />
-            </Box>
-          </Box>
+
+         
         </SimpleGrid>
 
         {/* </Container> */}
