@@ -134,7 +134,7 @@ function CustomerStatus() {
 
   const onClickSearch = () => {
     // const twitterAcc = e.twitter.toLowerCase()
-    const inputAcc = inputStr.toLowerCase()
+    const inputAcc = inputStr.toLowerCase();
     if (cusdata.find((e) => e.twitter.toLowerCase() === inputAcc)) {
       const filtered = cusdata.filter((arr) => {
         if (arr.twitter.toLowerCase().includes(inputAcc)) {
@@ -142,7 +142,7 @@ function CustomerStatus() {
         }
       });
       setDisplayData(filtered);
-      console.log('filtered',filtered)
+      console.log("filtered", filtered);
       if (filtered[0].phone) {
         setPwPanel(true);
         setErrorPanel(false);
@@ -163,15 +163,17 @@ function CustomerStatus() {
         return <Tag bgColor="teal.100">{status}</Tag>;
       case "ยังไม่ชำระ":
         return <Tag bgColor="red.100">{status}</Tag>;
-      default:
+      case "":
         return <></>;
+      default:
+        return <Tag bgColor="grey.100">{status}</Tag>;
     }
   };
 
   const productTypeMapped = (type) => {
     switch (type) {
       case "mbr":
-        return "เมืองโบราณ set C";
+        return "เมืองโบราณ set C – Collection 1";
       case "crocs":
         return "หารการ์ด crocs";
       default:
@@ -205,12 +207,7 @@ function CustomerStatus() {
               </AlertDescription>
             </Alert>
 
-            <Accordion
-              pt={2}
-              allowMultiple
-              width="100%"
-              rounded="lg"
-            >
+            <Accordion pt={2} allowMultiple width="100%" rounded="lg">
               <AccordionItem border="none" my={2}>
                 <AccordionButton
                   // display={'none'}
@@ -267,8 +264,9 @@ function CustomerStatus() {
           </>
         );
       case "crocs":
-        return <>
-                    <Stack textAlign={"left"} gap={1} py={5} px={2}>
+        return (
+          <>
+            <Stack textAlign={"left"} gap={1} py={5} px={2}>
               <Address displayData={displayData} />
             </Stack>
 
@@ -279,8 +277,8 @@ function CustomerStatus() {
               alignItems="center"
               justifyContent="center"
               textAlign="center"
-              borderRadius={'lg'}
-            // bgColor={'#B7E0FF'}
+              borderRadius={"lg"}
+              // bgColor={'#B7E0FF'}
             >
               <AlertIcon boxSize="40px" mr={0} />
               <AlertTitle mt={4} mb={1} fontSize="lg">
@@ -288,18 +286,14 @@ function CustomerStatus() {
               </AlertTitle>
               <AlertDescription maxWidth="sm">
                 {String.fromCodePoint(0xfe0f)}
-              ✈️ รอของถึงไทย <br />
-              ถึงไทยประมาณ <b>18-22 Oct</b>
-              <br /><br />
-              <b>เมมเบอร์ที่ยังว่าง:</b> ฮยอนซอก, จีฮุน,​โดยอง จองฮวาน
+                ✈️ รอของถึงไทย <br />
+                ถึงไทยประมาณ <b>18-22 Oct</b>
+                <br />
+                <br />
+                <b>เมมเบอร์ที่ยังว่าง:</b> ฮยอนซอก, จีฮุน,​โดยอง จองฮวาน
               </AlertDescription>
             </Alert>
-            <Accordion
-              pt={2}
-              allowMultiple
-              width="100%"
-              rounded="lg"
-            >
+            <Accordion pt={2} allowMultiple width="100%" rounded="lg">
               <AccordionItem border="none" my={2}>
                 <AccordionButton
                   // display={'none'}
@@ -320,7 +314,7 @@ function CustomerStatus() {
                   />
                 </AccordionButton>
                 <AccordionPanel pb={4}>
-                <img src={crocs_img} width="400px" alt="crocs_img" />
+                  <img src={crocs_img} width="400px" alt="crocs_img" />
                 </AccordionPanel>
               </AccordionItem>
               <AccordionItem border="none" my={2}>
@@ -351,9 +345,63 @@ function CustomerStatus() {
               </AccordionItem>
             </Accordion>
             <img src={crocs_all} alt="crocs_all" />
-        </>;
+          </>
+        );
       default:
         return <></>;
+    }
+  };
+
+  const trackingNoDisplay = (tracking) => {
+    if (tracking) {
+      return (
+        <>
+          <Stack
+            direction={"row"}
+            spacing={3}
+            align={"start"}
+            // textAlign={"center"}
+            // alignSelf={"center"}
+            // alignContent={"center"}
+            alignItems={"center"}
+            // position={"relative"}
+          >
+            <b>tracking no. (ไปรษณีย์ไทย)</b>
+            <Box bg="purtaple.100" px={3} py={1} borderRadius={"10px"}>
+              <Stack direction={"row"} align={"center"}>
+                <Text color={"purtaple.950"} fontWeight={500}>
+                  {tracking}
+                </Text>
+                <Button
+                  colorScheme="purtaple"
+                  variant="ghost"
+                  rightIcon={<CopyIcon />}
+                  onClick={() => {
+                    navigator.clipboard.writeText(tracking);
+                  }}
+                >
+                  คัดลอก
+                </Button>
+              </Stack>
+            </Box>
+            <Button
+              borderRadius={"20px"}
+              // leftIcon={<TwitterIcon width={"20px"} />}
+              colorScheme="purtaple"
+              variant="ghost"
+              onClick={() => {
+                window
+                  .open("https://track.thailandpost.co.th/", "_blank")
+                  .focus();
+              }}
+            >
+              <u>เช็คสถานะ</u>
+            </Button>
+          </Stack>
+        </>
+      );
+    } else {
+      return <></>;
     }
   };
 
@@ -457,7 +505,12 @@ function CustomerStatus() {
             display={togglePanel ? "contents" : "none"}
           >
             {/* display NONE */}
-            <Text color={"purtaple.500"} fontSize="3xl" fontWeight={600} display={'none'}>
+            <Text
+              color={"purtaple.500"}
+              fontSize="3xl"
+              fontWeight={600}
+              display={"none"}
+            >
               <Highlight
                 query={"[หาร]"}
                 styles={{
@@ -482,7 +535,12 @@ function CustomerStatus() {
                       py={2}
                       px={0}
                     >
-                      <Card variant={"outline"} width="100%" bg={"transparent"} p={{sm: 0, md: 2}}>
+                      <Card
+                        variant={"outline"}
+                        width="100%"
+                        bg={"transparent"}
+                        p={{ sm: 0, md: 2 }}
+                      >
                         <CardHeader pb={0}>
                           <Box display={"flex"}>
                             <StarIcon color="blue.200" />
@@ -492,10 +550,15 @@ function CustomerStatus() {
                             <AccordionIcon ml={"auto"} />
                           </Box>
                         </CardHeader>
-                        <CardBody px={{sm: 1, md: 2}}>
+                        <CardBody px={{ sm: 1, md: 2 }}>
                           <Grid templateColumns="repeat(4, 1fr)" gap={1}>
-                            <Text  sx={{textWrap: 'balance'}} fontSize={{sm: 14, md: 16}}>{row.member}</Text>
-                           <Text>{row.random}</Text>
+                            <Text
+                              sx={{ textWrap: "balance" }}
+                              fontSize={{ sm: 14, md: 16 }}
+                            >
+                              {row.member}
+                            </Text>
+                            <Text>{row.random}</Text>
                             <Text>
                               <b>฿ {row.price}</b>
                             </Text>
@@ -505,6 +568,11 @@ function CustomerStatus() {
                       </Card>
                     </AccordionButton>
                     <AccordionPanel bgColor={"purtaple.50"} borderRadius={"lg"}>
+                      <Box textAlign={"left"}>
+                        <Heading size="sm">โน้ต: </Heading>
+                        {row.note == "" ? "-" : row.note}
+                      </Box>
+                      {trackingNoDisplay(row.trackingNo)}
                       {accordianPanelDisplay(row.type)}
                     </AccordionPanel>
                   </AccordionItem>
