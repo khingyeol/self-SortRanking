@@ -203,7 +203,8 @@ function CustomerStatus() {
                 สถานะสินค้า
               </AlertTitle>
               <AlertDescription maxWidth="sm">
-                รอกดของ 10:00 | 26 ตุลาคม
+                ✅กดของ 10:00 | 26 ตุลาคม
+                รอจัดส่ง
               </AlertDescription>
             </Alert>
 
@@ -391,7 +392,7 @@ function CustomerStatus() {
               variant="ghost"
               onClick={() => {
                 window
-                  .open("https://track.thailandpost.co.th/", "_blank")
+                  .open(`https://track.thailandpost.co.th/?trackNumber=${tracking}`, "_blank")
                   .focus();
               }}
             >

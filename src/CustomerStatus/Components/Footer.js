@@ -3,10 +3,9 @@ import { ReactComponent as TwitterIcon } from "assets/twitter.svg";
 import React from "react";
 
 function Footer() {
-
-    return (
-        <>
-         <chakra.footer>
+  return (
+    <>
+      <chakra.footer>
         <Flex
           direction="row"
           gap={2}
@@ -36,21 +35,24 @@ function Footer() {
             variant="ghost"
             onClick={() => {
               window
-                .open(
-                  "https://x.com/intent/tweet?text=%23rv_purtaple%20",
-                  "_blank"
-                )
+                .open("https://x.com/search?q=%23rv_purtaple&f=live", "_blank")
                 .focus();
+              // window
+              //   .open(
+              //     "https://x.com/intent/tweet?text=%23rv_purtaple%20",
+              //     "_blank"
+              //   )
+              //   .focus();
             }}
           >
-            เขียนรีวิว #rv_purtaple
+            #rv_purtaple
           </Button>
 
           <Spacer />
         </Flex>
       </chakra.footer>
-        </>
-    )
+    </>
+  );
 }
 
 export default Footer;
