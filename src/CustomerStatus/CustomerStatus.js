@@ -176,12 +176,15 @@ function CustomerStatus() {
         return "เมืองโบราณ set C – Collection 1";
       case "crocs":
         return "หารการ์ด crocs";
+      case "mbr2":
+        return "เมืองโบราณ set C – Collection 2";
+      case "crocs":
       default:
         return "";
     }
   };
 
-  const accordianPanelDisplay = (type) => {
+  const accordianPanelDisplay = (type, detailStatus) => {
     switch (type) {
       case "mbr":
         return (
@@ -203,8 +206,7 @@ function CustomerStatus() {
                 สถานะสินค้า
               </AlertTitle>
               <AlertDescription maxWidth="sm">
-                ✅กดของ 10:00 | 26 ตุลาคม
-                รอจัดส่ง
+                ✅กดของ 10:00 | 26 ตุลาคม รอจัดส่ง
               </AlertDescription>
             </Alert>
 
@@ -348,6 +350,32 @@ function CustomerStatus() {
             <img src={crocs_all} alt="crocs_all" />
           </>
         );
+      case "mbr2":
+        return (
+          <>
+            <Stack textAlign={"left"} gap={1} py={5} px={2}>
+              <Address displayData={displayData} />
+            </Stack>
+            {detailStatus && (
+              <Alert
+                status="info"
+                variant="subtle"
+                flexDirection="column"
+                alignItems="center"
+                justifyContent="center"
+                textAlign="center"
+              >
+                <AlertIcon boxSize="40px" mr={0} />
+                <AlertTitle mt={4} mb={1} fontSize="lg">
+                  สถานะสินค้า
+                </AlertTitle>
+                <AlertDescription maxWidth="sm">
+                  {detailStatus}
+                </AlertDescription>
+              </Alert>
+            )}
+          </>
+        );
       default:
         return <></>;
     }
@@ -392,7 +420,10 @@ function CustomerStatus() {
               variant="ghost"
               onClick={() => {
                 window
-                  .open(`https://track.thailandpost.co.th/?trackNumber=${tracking}`, "_blank")
+                  .open(
+                    `https://track.thailandpost.co.th/?trackNumber=${tracking}`,
+                    "_blank"
+                  )
                   .focus();
               }}
             >
@@ -574,7 +605,7 @@ function CustomerStatus() {
                         {row.note == "" ? "-" : row.note}
                       </Box>
                       {trackingNoDisplay(row.trackingNo)}
-                      {accordianPanelDisplay(row.type)}
+                      {accordianPanelDisplay(row.type, row.detailStatus)}
                     </AccordionPanel>
                   </AccordionItem>
                 ))}

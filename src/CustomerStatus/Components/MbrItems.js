@@ -38,10 +38,6 @@ function MbrItems() {
                   </ListItem>
                   <ListItem>
                     <ListIcon as={CheckIcon} color="green.400" />
-                    PASSPORT 1 ใบ
-                  </ListItem>
-                  <ListItem>
-                    <ListIcon as={CheckIcon} color="green.400" />
                     ENTRANCE TICKET 1 ใบ
                   </ListItem>
                 </List>
