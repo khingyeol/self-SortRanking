@@ -77,6 +77,7 @@ import crocs_img from "assets/crocs_img.jpg";
 import crocs_all from "assets/crocs_all.jpeg";
 import {
   CheckIcon,
+  WarningIcon,
   ChevronDownIcon,
   CopyIcon,
   DeleteIcon,
@@ -178,7 +179,8 @@ function CustomerStatus() {
         return "หารการ์ด crocs";
       case "mbr2":
         return "เมืองโบราณ set C – Collection 2";
-      case "crocs":
+      case "knpops":
+        return "PLEASURE รอบไซน์ KNPOPS"
       default:
         return "";
     }
@@ -376,6 +378,105 @@ function CustomerStatus() {
             )}
           </>
         );
+        case "knpops":
+          return (
+            <>
+            <Box
+                          // maxW={'330px'}
+                          w={"full"}
+                          bg="white"
+                          // boxShadow={'2xl'}
+                          rounded={"md"}
+                          overflow={"hidden"}
+                        >
+                          <Box bg="gray.50" px={6} py={5}>
+                          <Text color={"gray.800"} fontWeight={500}>TREASURE PLEASURE รอบไซน์ KNPOPS</Text>
+                          <Text color={"gray.800"} fontWeight={500}></Text>
+                          <Text color={"gray.800"} fontWeight={500}>🦔CHOI HYUNSUK🦔</Text>
+
+                            <List spacing={0}>
+                              <ListItem>
+                                <Text color={"gray.800"} fontWeight={500}>
+                                  <Highlight
+                                    query={"150฿"}
+                                    styles={{
+                                      px: "2",
+                                      py: "1",
+                                      rounded: "full",
+                                      bg: "teal.100",
+                                    }}
+                                  >
+                                    Digipack Blue ver. ราคา 150฿/บั้ม
+                                  </Highlight>
+                                </Text>
+                              </ListItem>
+                              <ListItem>
+                                <ListIcon as={CheckIcon} color="green.400" />
+                               รวมส่งลงทะเบียน
+                              </ListItem>
+                              <ListItem>
+                                <ListIcon as={CheckIcon} color="green.400" />
+                               อัลบั้มไม่แกะ ของครบ
+                              </ListItem>
+                              <ListItem>
+                                <ListIcon as={CheckIcon} color="green.400" />
+                                จัดส่งเรือ 15-20 วัน (จัดส่งหลังอีเวนท์จบ)
+                              </ListItem>
+                              {/* <ListItem>
+                                <ListIcon as={WarningIcon} color="yellow.400" />
+                               ตอนกดทางเว็บไม่ได้ระบุปกดิจิมา อาจจะคละมาให้ครบเมม หรืออาจจะเป็นปกฮยอนซอกทั้งลัง
+                              </ListItem> */}
+                            </List>
+                          </Box>
+                        </Box>
+            {detailStatus && (
+              <Alert
+                status="info"
+                variant="subtle"
+                flexDirection="column"
+                alignItems="center"
+                justifyContent="center"
+                textAlign="center"
+              >
+                <AlertIcon boxSize="40px" mr={0} />
+                <AlertTitle mt={4} mb={1} fontSize="lg">
+                  สถานะสินค้า
+                </AlertTitle>
+                <AlertDescription maxWidth="sm">
+                  {detailStatus}
+                </AlertDescription>
+              </Alert>
+            )}
+            
+            <Accordion pt={2} allowMultiple width="100%" rounded="lg">
+            <AccordionItem border="none" my={2}>
+                <AccordionButton
+                  // display={'none'}
+                  display="flex"
+                  alignItems="center"
+                  justifyContent="space-between"
+                  bgColor={"white"}
+                  borderRadius={"lg"}
+                  p={2}
+                >
+                  <Text color={"gray.700"} fontWeight={500}>
+                    หลักฐานการกด
+                  </Text>
+                  <IconButton
+                    icon={<ViewIcon />}
+                    aria-label={"ViewIcon"}
+                    borderRadius={"20px"}
+                  />
+                </AccordionButton>
+                <AccordionPanel pb={4}>
+                <Image src="https://i.imgur.com/r9Rd0sq.png" />
+                </AccordionPanel>
+              </AccordionItem>
+              </Accordion>
+
+  
+            </>
+            )
       default:
         return <></>;
     }
