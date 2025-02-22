@@ -162,8 +162,12 @@ function CustomerStatus() {
     switch (status) {
       case "ชำระแล้ว":
         return <Tag bgColor="teal.100">{status}</Tag>;
+      case "ชำระเต็มจำนวน":
+        return <Tag bgColor="teal.100">{status}</Tag>;
       case "ยังไม่ชำระ":
         return <Tag bgColor="red.100">{status}</Tag>;
+      case "มัดจำ":
+        return <Tag bgColor="yellow.300">{status}</Tag>;
       case "":
         return <></>;
       default:
@@ -180,9 +184,11 @@ function CustomerStatus() {
       case "mbr2":
         return "เมืองโบราณ set C – Collection 2";
       case "knpops":
-        return "PLEASURE รอบไซน์ KNPOPS"
+        return "PLEASURE รอบไซน์ KNPOPS";
+      case "ygselect":
+        return "PLEASURE รอบไซน์ YG SELECT (Online)";
       default:
-        return "";
+        return type;
     }
   };
 
@@ -378,57 +384,61 @@ function CustomerStatus() {
             )}
           </>
         );
-        case "knpops":
-          return (
-            <>
+      case "knpops":
+        return (
+          <>
             <Box
-                          // maxW={'330px'}
-                          w={"full"}
-                          bg="white"
-                          // boxShadow={'2xl'}
-                          rounded={"md"}
-                          overflow={"hidden"}
-                        >
-                          <Box bg="gray.50" px={6} py={5}>
-                          <Text color={"gray.800"} fontWeight={500}>TREASURE PLEASURE รอบไซน์ KNPOPS</Text>
-                          <Text color={"gray.800"} fontWeight={500}></Text>
-                          <Text color={"gray.800"} fontWeight={500}>🦔CHOI HYUNSUK🦔</Text>
+              // maxW={'330px'}
+              w={"full"}
+              bg="white"
+              // boxShadow={'2xl'}
+              rounded={"md"}
+              overflow={"hidden"}
+            >
+              <Box bg="gray.50" px={6} py={5}>
+                <Text color={"gray.800"} fontWeight={500}>
+                  TREASURE PLEASURE รอบไซน์ KNPOPS
+                </Text>
+                <Text color={"gray.800"} fontWeight={500}></Text>
+                <Text color={"gray.800"} fontWeight={500}>
+                  🦔CHOI HYUNSUK🦔
+                </Text>
 
-                            <List spacing={0}>
-                              <ListItem>
-                                <Text color={"gray.800"} fontWeight={500}>
-                                  <Highlight
-                                    query={"150฿"}
-                                    styles={{
-                                      px: "2",
-                                      py: "1",
-                                      rounded: "full",
-                                      bg: "teal.100",
-                                    }}
-                                  >
-                                    Digipack Blue ver. ราคา 150฿/บั้ม
-                                  </Highlight>
-                                </Text>
-                              </ListItem>
-                              <ListItem>
-                                <ListIcon as={CheckIcon} color="green.400" />
-                               รวมส่งลงทะเบียน
-                              </ListItem>
-                              <ListItem>
-                                <ListIcon as={CheckIcon} color="green.400" />
-                               อัลบั้มไม่แกะ ของครบ
-                              </ListItem>
-                              <ListItem>
-                                <ListIcon as={CheckIcon} color="green.400" />
-                                จัดส่งเรือ 15-20 วัน (จัดส่งหลังอีเวนท์จบ)
-                              </ListItem>
-                              {/* <ListItem>
+                <List spacing={0}>
+                  <ListItem>
+                    <Text color={"gray.800"} fontWeight={500}>
+                      <Highlight
+                        query={"150฿"}
+                        styles={{
+                          px: "2",
+                          py: "1",
+                          rounded: "full",
+                          bg: "teal.100",
+                        }}
+                      >
+                        Digipack Blue ver. ราคา 150฿/บั้ม
+                      </Highlight>
+                    </Text>
+                  </ListItem>
+                  <ListItem>
+                    <ListIcon as={CheckIcon} color="green.400" />
+                    รวมส่งลงทะเบียน
+                  </ListItem>
+                  <ListItem>
+                    <ListIcon as={CheckIcon} color="green.400" />
+                    อัลบั้มไม่แกะ ของครบ
+                  </ListItem>
+                  <ListItem>
+                    <ListIcon as={CheckIcon} color="green.400" />
+                    จัดส่งเรือ 15-20 วัน (จัดส่งหลังอีเวนท์จบ)
+                  </ListItem>
+                  {/* <ListItem>
                                 <ListIcon as={WarningIcon} color="yellow.400" />
                                ตอนกดทางเว็บไม่ได้ระบุปกดิจิมา อาจจะคละมาให้ครบเมม หรืออาจจะเป็นปกฮยอนซอกทั้งลัง
                               </ListItem> */}
-                            </List>
-                          </Box>
-                        </Box>
+                </List>
+              </Box>
+            </Box>
             {detailStatus && (
               <Alert
                 status="info"
@@ -447,9 +457,37 @@ function CustomerStatus() {
                 </AlertDescription>
               </Alert>
             )}
-            
+
+<Accordion pt={2} allowMultiple width="100%" rounded="lg">
+              <AccordionItem border="none" my={2}>
+                <AccordionButton
+                  // display={'none'}
+                  display="flex"
+                  alignItems="center"
+                  justifyContent="space-between"
+                  bgColor={"white"}
+                  borderRadius={"lg"}
+                  p={2}
+                >
+                  <Text color={"gray.700"} fontWeight={500}>
+                   รายละเอียด
+                  </Text>
+                  <IconButton
+                    icon={<ViewIcon />}
+                    aria-label={"ViewIcon"}
+                    borderRadius={"20px"}
+                  />
+                </AccordionButton>
+                <AccordionPanel pb={4}>
+                  <Image src="https://i.imgur.com/fwqaVsG.png" />
+                  <Image src="https://i.imgur.com/U9y9Smk.jpeg" />
+                  
+                </AccordionPanel>
+              </AccordionItem>
+            </Accordion>
+
             <Accordion pt={2} allowMultiple width="100%" rounded="lg">
-            <AccordionItem border="none" my={2}>
+              <AccordionItem border="none" my={2}>
                 <AccordionButton
                   // display={'none'}
                   display="flex"
@@ -469,14 +507,143 @@ function CustomerStatus() {
                   />
                 </AccordionButton>
                 <AccordionPanel pb={4}>
-                <Image src="https://i.imgur.com/r9Rd0sq.png" />
+                  <Image src="https://i.imgur.com/r9Rd0sq.png" />
                 </AccordionPanel>
               </AccordionItem>
-              </Accordion>
-
+            </Accordion>
+          </>
+        );
+        case "ygselect":
+          return (
+            <>
+              <Box
+                // maxW={'330px'}
+                w={"full"}
+                bg="white"
+                // boxShadow={'2xl'}
+                rounded={"md"}
+                overflow={"hidden"}
+              >
+                <Box bg="gray.50" px={6} py={5}>
+                  <Text color={"gray.800"} fontWeight={500}>
+                    TREASURE PLEASURE รอบไซน์ YG SELECT (Online)
+                  </Text>
+                  <Text color={"gray.800"} fontWeight={500}></Text>
+                  <Text color={"gray.800"} fontWeight={500}>
+                    ⭕️เลือกปกได้
+                  </Text>
   
+                  <List spacing={0}>
+                    <ListItem>
+                      <Text color={"gray.800"} fontWeight={500}>
+                        <Highlight
+                          query={"150฿"}
+                          styles={{
+                            px: "2",
+                            py: "1",
+                            rounded: "full",
+                            bg: "teal.100",
+                          }}
+                        >
+                          Digipack Blue ver. ราคา 160฿/บั้ม
+                        </Highlight>
+                      </Text>
+                    </ListItem>
+                    <ListItem>
+                      <ListIcon as={CheckIcon} color="green.400" />
+                      รวมส่งลงทะเบียน
+                    </ListItem>
+                    <ListItem>
+                      <ListIcon as={CheckIcon} color="green.400" />
+                      อัลบั้มไม่แกะ ของครบ
+                    </ListItem>
+                    <ListItem>
+                      <ListIcon as={CheckIcon} color="green.400" />
+                      จัดส่งเรือ 15-20 วัน (จัดส่งหลังอีเวนท์จบ)
+                    </ListItem>
+                    {/* <ListItem>
+                                  <ListIcon as={WarningIcon} color="yellow.400" />
+                                 ตอนกดทางเว็บไม่ได้ระบุปกดิจิมา อาจจะคละมาให้ครบเมม หรืออาจจะเป็นปกฮยอนซอกทั้งลัง
+                                </ListItem> */}
+                  </List>
+                </Box>
+              </Box>
+              {detailStatus && (
+                <Alert
+                  status="info"
+                  variant="subtle"
+                  flexDirection="column"
+                  alignItems="center"
+                  justifyContent="center"
+                  textAlign="center"
+                >
+                  <AlertIcon boxSize="40px" mr={0} />
+                  <AlertTitle mt={4} mb={1} fontSize="lg">
+                    สถานะสินค้า
+                  </AlertTitle>
+                  <AlertDescription maxWidth="sm">
+                    {detailStatus}
+                  </AlertDescription>
+                </Alert>
+              )}
+  
+  <Accordion pt={2} allowMultiple width="100%" rounded="lg">
+                <AccordionItem border="none" my={2}>
+                  <AccordionButton
+                    // display={'none'}
+                    display="flex"
+                    alignItems="center"
+                    justifyContent="space-between"
+                    bgColor={"white"}
+                    borderRadius={"lg"}
+                    p={2}
+                  >
+                    <Text color={"gray.700"} fontWeight={500}>
+                     รายละเอียด
+                    </Text>
+                    <IconButton
+                      icon={<ViewIcon />}
+                      aria-label={"ViewIcon"}
+                      borderRadius={"20px"}
+                    />
+                  </AccordionButton>
+                  <AccordionPanel pb={4}>
+                    <Image src="https://i.imgur.com/fwqaVsG.png" />
+                    <Image src="https://i.imgur.com/SU0guMV.jpeg" />
+                    
+                  </AccordionPanel>
+                </AccordionItem>
+              </Accordion>
+  
+              <Accordion pt={2} allowMultiple width="100%" rounded="lg">
+                <AccordionItem border="none" my={2}>
+                  <AccordionButton
+                    // display={'none'}
+                    display="flex"
+                    alignItems="center"
+                    justifyContent="space-between"
+                    bgColor={"white"}
+                    borderRadius={"lg"}
+                    p={2}
+                  >
+                    <Text color={"gray.700"} fontWeight={500}>
+                      หลักฐานการกด
+                    </Text>
+                    <IconButton
+                      icon={<ViewIcon />}
+                      aria-label={"ViewIcon"}
+                      borderRadius={"20px"}
+                    />
+                  </AccordionButton>
+                  <AccordionPanel pb={4}>
+                    <Image src="https://i.imgur.com/gNMD89q.png" />
+                    <Image src="https://i.imgur.com/nHeAR4J.jpeg" />
+
+                  </AccordionPanel>
+                </AccordionItem>
+              </Accordion>
             </>
-            )
+          );
       default:
         return <></>;
     }
@@ -692,10 +859,23 @@ function CustomerStatus() {
                               {row.member}
                             </Text>
                             <Text>{row.random}</Text>
-                            <Text>
-                              <b>฿ {row.price}</b>
-                            </Text>
-                            <Text>{statusMapped(row.status)}</Text>
+
+                            <Flex display="flow">
+                              <Text>
+                                <b>ยอดทั้งหมด</b>
+                              </Text>
+                              <Text>
+                                <b>฿ {row.price}</b>
+                              </Text>
+                            </Flex>
+                            <Flex display="flow">
+                              <Text>
+                              <Text>{statusMapped(row.status)}</Text>
+                              </Text>
+                            {row.status == "มัดจำ" && <Text fontSize='14'>
+                              ชำระแล้ว ฿{row.paidAmt}
+                            </Text>}
+                            </Flex>
                           </Grid>
                         </CardBody>
                       </Card>
