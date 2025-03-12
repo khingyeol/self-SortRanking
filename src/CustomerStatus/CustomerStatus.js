@@ -192,6 +192,31 @@ function CustomerStatus() {
     }
   };
 
+  const alertDetailStatusDisplay = (detailStatus) => {
+    return (
+      <>
+      {detailStatus && (
+              <Alert
+                status="info"
+                variant="subtle"
+                flexDirection="column"
+                alignItems="center"
+                justifyContent="center"
+                textAlign="center"
+              >
+                <AlertIcon boxSize="40px" mr={0} />
+                <AlertTitle mt={4} mb={1} fontSize="lg">
+                  สถานะสินค้า
+                </AlertTitle>
+                <AlertDescription maxWidth="sm" whiteSpace='pre-wrap'>
+                  {detailStatus}
+                </AlertDescription>
+              </Alert>
+            )}
+      </>
+    );
+  }
+
   const accordianPanelDisplay = (type, detailStatus) => {
     switch (type) {
       case "mbr":
@@ -443,25 +468,7 @@ function CustomerStatus() {
                 </List>
               </Box>
             </Box>
-            {detailStatus && (
-              <Alert
-                status="info"
-                variant="subtle"
-                flexDirection="column"
-                alignItems="center"
-                justifyContent="center"
-                textAlign="center"
-              >
-                <AlertIcon boxSize="40px" mr={0} />
-                <AlertTitle mt={4} mb={1} fontSize="lg">
-                  สถานะสินค้า
-                </AlertTitle>
-                <AlertDescription maxWidth="sm">
-                  {detailStatus}
-                </AlertDescription>
-              </Alert>
-            )}
-
+                  {alertDetailStatusDisplay(detailStatus)}
             <Accordion pt={2} allowMultiple width="100%" rounded="lg">
               <AccordionItem border="none" my={2}>
                 <AccordionButton
@@ -483,7 +490,8 @@ function CustomerStatus() {
                   />
                 </AccordionButton>
                 <AccordionPanel pb={4}>
-                  <Image src="https://i.imgur.com/fwqaVsG.png" />
+                <Image src="https://i.imgur.com/9OWeQhZ.jpeg" />
+                  <Image src="https://i.imgur.com/mU7Ge6N.jpeg" />
                   <Image src="https://i.imgur.com/U9y9Smk.jpeg" />
                 </AccordionPanel>
               </AccordionItem>
@@ -575,24 +583,7 @@ function CustomerStatus() {
                 </List>
               </Box>
             </Box>
-            {detailStatus && (
-              <Alert
-                status="info"
-                variant="subtle"
-                flexDirection="column"
-                alignItems="center"
-                justifyContent="center"
-                textAlign="center"
-              >
-                <AlertIcon boxSize="40px" mr={0} />
-                <AlertTitle mt={4} mb={1} fontSize="lg">
-                  สถานะสินค้า
-                </AlertTitle>
-                <AlertDescription maxWidth="sm">
-                  {detailStatus}
-                </AlertDescription>
-              </Alert>
-            )}
+            {alertDetailStatusDisplay(detailStatus)}
 
             <Accordion pt={2} allowMultiple width="100%" rounded="lg">
               <AccordionItem border="none" my={2}>
@@ -615,8 +606,9 @@ function CustomerStatus() {
                   />
                 </AccordionButton>
                 <AccordionPanel pb={4}>
-                  <Image src="https://i.imgur.com/fwqaVsG.png" />
-                  <Image src="https://i.imgur.com/SU0guMV.jpeg" />
+                  <Image src="https://i.imgur.com/9OWeQhZ.jpeg" />
+                  <Image src="https://i.imgur.com/mU7Ge6N.jpeg" />
+                  <Image src="https://i.imgur.com/14m8nhE.png" />
                 </AccordionPanel>
               </AccordionItem>
             </Accordion>
@@ -654,6 +646,7 @@ function CustomerStatus() {
           <>
             <Stack textAlign={"left"} gap={1} py={5} px={2}>
               <Address displayData={displayData} />
+              {alertDetailStatusDisplay(detailStatus)}
             </Stack>
           </>
         );

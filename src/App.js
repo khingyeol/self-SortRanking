@@ -61,14 +61,14 @@ const router = createBrowserRouter([
       }
     ]
   },
-  {
-    path: "countdown-dy",
-    Component: Countdown
-  },
-  {
-    path: "countdown-suk",
-    Component: CountdownSuk
-  },
+  // {
+  //   path: "countdown-dy",
+  //   Component: Countdown
+  // },
+  // {
+  //   path: "countdown-suk",
+  //   Component: CountdownSuk
+  // },
   // {
   //   path: "truz-custom",
   //   Component: TruzCustom
@@ -108,9 +108,9 @@ function HomePage() {
             </Text>
             <Spacer />
             <Stack className="stack-btn" spacing="16px">
-              <Button size="lg" padding="20px" onClick={onOpen}>
+              {/* <Button size="lg" padding="20px" onClick={onOpen}>
                 Click me 👆🏻
-              </Button>
+              </Button> */}
               <Divider />
               <Button
                 size="lg"
