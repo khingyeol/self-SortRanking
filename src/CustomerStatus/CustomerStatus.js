@@ -684,7 +684,7 @@ function CustomerStatus() {
                 }
               </Text>
 
-              <Text color={"gray.800"} fontWeight={500} pt={5}>
+              {/* <Text color={"gray.800"} fontWeight={500} pt={5}>
                 <Highlight
                   query={"จัดส่งช่วงก่อน/หลังแฟนคอนที่เกาหลี 29-30 Mar."}
                   styles={{
@@ -696,7 +696,7 @@ function CustomerStatus() {
                 >
                   {'จัดส่งช่วงก่อน/หลังแฟนคอนที่เกาหลี 29-30 Mar.'}
                 </Highlight>
-              </Text>
+              </Text> */}
             </Box>
 
             {alertDetailStatusDisplay(detailStatus)}
