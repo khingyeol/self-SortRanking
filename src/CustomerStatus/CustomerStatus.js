@@ -187,6 +187,8 @@ function CustomerStatus() {
         return "PLEASURE รอบไซน์ KNPOPS";
       case "ygselect":
         return "PLEASURE รอบไซน์ YG SELECT (Online)";
+      case "kisswill":
+        return "พัด, สโลแกน hoonsuk @kisswillkiss";
       default:
         return type;
     }
@@ -195,27 +197,27 @@ function CustomerStatus() {
   const alertDetailStatusDisplay = (detailStatus) => {
     return (
       <>
-      {detailStatus && (
-              <Alert
-                status="info"
-                variant="subtle"
-                flexDirection="column"
-                alignItems="center"
-                justifyContent="center"
-                textAlign="center"
-              >
-                <AlertIcon boxSize="40px" mr={0} />
-                <AlertTitle mt={4} mb={1} fontSize="lg">
-                  สถานะสินค้า
-                </AlertTitle>
-                <AlertDescription maxWidth="sm" whiteSpace='pre-wrap'>
-                  {detailStatus}
-                </AlertDescription>
-              </Alert>
-            )}
+        {detailStatus && (
+          <Alert
+            status="info"
+            variant="subtle"
+            flexDirection="column"
+            alignItems="center"
+            justifyContent="center"
+            textAlign="center"
+          >
+            <AlertIcon boxSize="40px" mr={0} />
+            <AlertTitle mt={4} mb={1} fontSize="lg">
+              สถานะสินค้า
+            </AlertTitle>
+            <AlertDescription maxWidth="sm" whiteSpace="pre-wrap">
+              {detailStatus}
+            </AlertDescription>
+          </Alert>
+        )}
       </>
     );
-  }
+  };
 
   const accordianPanelDisplay = (type, detailStatus) => {
     switch (type) {
@@ -420,9 +422,9 @@ function CustomerStatus() {
               rounded={"md"}
               overflow={"hidden"}
             >
-                      <Stack textAlign={"left"} gap={1} py={5} px={2}>
-              <Address displayData={displayData} />
-            </Stack>
+              <Stack textAlign={"left"} gap={1} py={5} px={2}>
+                <Address displayData={displayData} />
+              </Stack>
 
               <Box bg="gray.50" px={6} py={5}>
                 <Text color={"gray.800"} fontWeight={500}>
@@ -468,7 +470,7 @@ function CustomerStatus() {
                 </List>
               </Box>
             </Box>
-                  {alertDetailStatusDisplay(detailStatus)}
+            {alertDetailStatusDisplay(detailStatus)}
             <Accordion pt={2} allowMultiple width="100%" rounded="lg">
               <AccordionItem border="none" my={2}>
                 <AccordionButton
@@ -490,7 +492,7 @@ function CustomerStatus() {
                   />
                 </AccordionButton>
                 <AccordionPanel pb={4}>
-                <Image src="https://i.imgur.com/9OWeQhZ.jpeg" />
+                  <Image src="https://i.imgur.com/9OWeQhZ.jpeg" />
                   <Image src="https://i.imgur.com/mU7Ge6N.jpeg" />
                   <Image src="https://i.imgur.com/U9y9Smk.jpeg" />
                 </AccordionPanel>
@@ -536,9 +538,9 @@ function CustomerStatus() {
               overflow={"hidden"}
             >
               <Stack textAlign={"left"} gap={1} py={5} px={2}>
-              <Address displayData={displayData} />
-            </Stack>
-            
+                <Address displayData={displayData} />
+              </Stack>
+
               <Box bg="gray.50" px={6} py={5}>
                 <Text color={"gray.800"} fontWeight={500}>
                   TREASURE PLEASURE รอบไซน์ YG SELECT (Online)
@@ -636,6 +638,92 @@ function CustomerStatus() {
                 <AccordionPanel pb={4}>
                   <Image src="https://i.imgur.com/gNMD89q.png" />
                   <Image src="https://i.imgur.com/nHeAR4J.jpeg" />
+                </AccordionPanel>
+              </AccordionItem>
+            </Accordion>
+          </>
+        );
+      case "kisswill":
+        return (
+          <>
+            <Box
+              // maxW={'330px'}
+              w={"full"}
+              bg="white"
+              // boxShadow={'2xl'}
+              rounded={"md"}
+              overflow={"hidden"}
+            >
+              <Stack textAlign={"left"} gap={1} py={5} px={2}>
+                <Address displayData={displayData} />
+              </Stack>
+            </Box>
+            <Box bg="gray.50" px={6} py={5}>
+              <Text color={"gray.800"} fontWeight={500}>
+                <Highlight
+                  query={"@kisswillkiss"}
+                  styles={{
+                    px: "2",
+                    py: "1",
+                    rounded: "full",
+                    bg: "blue.100",
+                  }}
+                >
+                  (Pre-Order) @kisswillkiss พัด สโลแกน #ฮุนซอก
+                </Highlight>
+              </Text>
+              <Text color={"gray.800"} fontWeight={500} whiteSpace="pre-wrap">
+                {
+                  "\n⭕️เลือก ver. Yellow💛/Black🖤\n💟 สโลแกน 430฿\n💟 พัด อุชิวะ 450฿"
+                }
+              </Text>
+
+              <Text color={"gray.800"} fontWeight={500} whiteSpace="pre-wrap">
+                {
+                  "\nเก็บ 2 รอบ ส่งแอร์ ✈️ (3-4 วันถึงไทยหลังจัดส่ง)\n📮ค่าส่ง 30 (พัด+20฿) 🙆🏻‍♀️นัดรับ bts/mrt"
+                }
+              </Text>
+
+              <Text color={"gray.800"} fontWeight={500} pt={5}>
+                <Highlight
+                  query={"จัดส่งช่วงก่อน/หลังแฟนคอนที่เกาหลี 29-30 Mar."}
+                  styles={{
+                    px: "2",
+                    py: "1",
+                    rounded: "full",
+                    bg: "yellow.100",
+                  }}
+                >
+                  {'จัดส่งช่วงก่อน/หลังแฟนคอนที่เกาหลี 29-30 Mar.'}
+                </Highlight>
+              </Text>
+            </Box>
+
+            {alertDetailStatusDisplay(detailStatus)}
+            <Image src="https://pbs.twimg.com/media/GmUW5UCakAAvBcY?format=jpg&name=4096x4096" />
+
+            <Accordion pt={2} allowMultiple width="100%" rounded="lg">
+              <AccordionItem border="none" my={2}>
+                <AccordionButton
+                  // display={'none'}
+                  display="flex"
+                  alignItems="center"
+                  justifyContent="space-between"
+                  bgColor={"white"}
+                  borderRadius={"lg"}
+                  p={2}
+                >
+                  <Text color={"gray.700"} fontWeight={500}>
+                    หลักฐานการสั่ง
+                  </Text>
+                  <IconButton
+                    icon={<ViewIcon />}
+                    aria-label={"ViewIcon"}
+                    borderRadius={"20px"}
+                  />
+                </AccordionButton>
+                <AccordionPanel pb={4}>
+                  <Image src="https://i.imgur.com/AKwkAFh.png" />
                 </AccordionPanel>
               </AccordionItem>
             </Accordion>
