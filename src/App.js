@@ -26,6 +26,7 @@ import Countdown from "CountdownPage/Countdown";
 import TruzCustom from "TruzCustom/TruzCustom";
 import CustomerStatus from "CustomerStatus/CustomerStatus";
 import CountdownSuk from "CountdownPage/CountdownSuk";
+import JapanFancon from "JapanFancon/JapanFancon";
 
 const theme = extendTheme({
   colors: {
@@ -78,6 +79,10 @@ const router = createBrowserRouter([
     Component: CustomerStatus
   },
   {
+    path: "2025-japan-fancon",
+    Component: JapanFancon
+  },
+  {
     path: "*",
     Component: HomePage
   }
@@ -102,12 +107,12 @@ function HomePage() {
         <header className="App-header">
           {/* <img src={img} className="App-logo" alt="logo" /> */}
           <Stack className="stack">
-            <Heading as="h2">Hi, hello</Heading>
+            <Heading as="h2">퍼플ꕀ😼🍠</Heading>
             <Text fontSize="2xl">
-              I'm still don't know the purpose of this website 55+
+              {/* I'm still don't know the purpose of this website 55+ */}
             </Text>
             <Spacer />
-            <Stack className="stack-btn" spacing="16px">
+            <Stack display='none' className="stack-btn" spacing="16px">
               {/* <Button size="lg" padding="20px" onClick={onOpen}>
                 Click me 👆🏻
               </Button> */}
