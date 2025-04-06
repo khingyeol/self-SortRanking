@@ -2,7 +2,7 @@ import { chakra, Flex, Text, Spacer, Button, Stack } from "@chakra-ui/react";
 import { ReactComponent as TwitterIcon } from "assets/twitter.svg";
 import React from "react";
 
-function Address({displayData}) {
+function Address({address}) {
 
     return (
         <>
@@ -23,7 +23,24 @@ function Address({displayData}) {
                 >
                   📦ที่อยู่จัดส่ง
                 </Text>
-                {displayData.map((row, index) =>
+                {address ? (
+                  <div key={address.name}>
+                  <Text fontSize={"14px"} color="gray.800">
+                    จัดส่ง {address.shipping}
+                  </Text>
+                  <Stack direction={"row"} align={"center"}>
+                    <Text fontSize={"14px"} fontWeight={800}>
+                      {address.name}
+                    </Text>
+                    <Text fontSize={"12px"} color="gray.500">
+                      ({address.phone})
+                    </Text>
+                  </Stack>
+                  <Text fontSize={"14px"}>{address.address}</Text>
+                </div>
+                ) : (<Text fontSize={"14px"}>-</Text>)}
+
+                {/* {displayData.map((row, index) =>
                   row.address ? (
                     <div key={index}>
                       <Text fontSize={"14px"} color="gray.800">
@@ -42,7 +59,7 @@ function Address({displayData}) {
                   ) : (
                     <Text fontSize={"14px"}>-</Text>
                   )
-                )}
+                )} */}
         </>
     )
 }

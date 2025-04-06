@@ -219,13 +219,13 @@ function CustomerStatus() {
     );
   };
 
-  const accordianPanelDisplay = (type, detailStatus) => {
+  const accordianPanelDisplay = (type, detailStatus, address, exactCard) => {
     switch (type) {
       case "mbr":
         return (
           <>
             <Stack textAlign={"left"} gap={1} py={5} px={2}>
-              <Address displayData={displayData} />
+              <Address address={address} />
             </Stack>
 
             <Alert
@@ -305,7 +305,7 @@ function CustomerStatus() {
         return (
           <>
             <Stack textAlign={"left"} gap={1} py={5} px={2}>
-              <Address displayData={displayData} />
+              <Address address={address} />
             </Stack>
 
             <Alert
@@ -389,7 +389,7 @@ function CustomerStatus() {
         return (
           <>
             <Stack textAlign={"left"} gap={1} py={5} px={2}>
-              <Address displayData={displayData} />
+              <Address address={address} />
             </Stack>
             {detailStatus && (
               <Alert
@@ -423,7 +423,7 @@ function CustomerStatus() {
               overflow={"hidden"}
             >
               <Stack textAlign={"left"} gap={1} py={5} px={2}>
-                <Address displayData={displayData} />
+                <Address address={address} />
               </Stack>
 
               <Box bg="gray.50" px={6} py={5}>
@@ -529,6 +529,11 @@ function CustomerStatus() {
       case "ygselect":
         return (
           <>
+          
+              <Box textAlign={"left"}>
+              <Tag bgColor="pink.100">{'เบเนที่ได้'}</Tag>
+              {exactCard}
+              </Box>
             <Box
               // maxW={'330px'}
               w={"full"}
@@ -538,7 +543,7 @@ function CustomerStatus() {
               overflow={"hidden"}
             >
               <Stack textAlign={"left"} gap={1} py={5} px={2}>
-                <Address displayData={displayData} />
+                <Address address={address} />
               </Stack>
 
               <Box bg="gray.50" px={6} py={5}>
@@ -655,7 +660,7 @@ function CustomerStatus() {
               overflow={"hidden"}
             >
               <Stack textAlign={"left"} gap={1} py={5} px={2}>
-                <Address displayData={displayData} />
+                <Address address={address} />
               </Stack>
             </Box>
             <Box bg="gray.50" px={6} py={5}>
@@ -733,7 +738,7 @@ function CustomerStatus() {
         return (
           <>
             <Stack textAlign={"left"} gap={1} py={5} px={2}>
-              <Address displayData={displayData} />
+              <Address address={address} />
               {alertDetailStatusDisplay(detailStatus)}
             </Stack>
           </>
@@ -980,7 +985,7 @@ function CustomerStatus() {
                         {row.note == "" ? "-" : row.note}
                       </Box>
                       {trackingNoDisplay(row.trackingNo)}
-                      {accordianPanelDisplay(row.type, row.detailStatus)}
+                      {accordianPanelDisplay(row.type, row.detailStatus, row, row.exactCard)}
                     </AccordionPanel>
                   </AccordionItem>
                 ))}
