@@ -688,7 +688,7 @@ function CustomerStatus() {
                   "\nเก็บ 2 รอบ ส่งแอร์ ✈️ (3-4 วันถึงไทยหลังจัดส่ง)\n📮ค่าส่ง 30 (พัด+20฿) 🙆🏻‍♀️นัดรับ bts/mrt"
                 }
               </Text>
-
+              <PaymentDetail date="" regis={""} ems={""} />
               {/* <Text color={"gray.800"} fontWeight={500} pt={5}>
                 <Highlight
                   query={"จัดส่งช่วงก่อน/หลังแฟนคอนที่เกาหลี 29-30 Mar."}
