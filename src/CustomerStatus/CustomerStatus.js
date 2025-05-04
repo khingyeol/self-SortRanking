@@ -529,11 +529,10 @@ function CustomerStatus() {
       case "ygselect":
         return (
           <>
-          
-              <Box textAlign={"left"}>
-              <Tag bgColor="pink.100">{'เบเนที่ได้'}</Tag>
+            <Box textAlign={"left"}>
+              <Tag bgColor="pink.100">{"เบเนที่ได้"}</Tag>
               {exactCard}
-              </Box>
+            </Box>
             <Box
               // maxW={'330px'}
               w={"full"}
@@ -955,7 +954,11 @@ function CustomerStatus() {
                             >
                               {row.member}
                             </Text>
-                            <Text>{row.random}</Text>
+                            <Text
+                            whiteSpace='pre-wrap'
+                                                        display="flow"
+
+                            >{row.random}</Text>
 
                             <Flex display="flow">
                               <Text>
@@ -985,7 +988,12 @@ function CustomerStatus() {
                         {row.note == "" ? "-" : row.note}
                       </Box>
                       {trackingNoDisplay(row.trackingNo)}
-                      {accordianPanelDisplay(row.type, row.detailStatus, row, row.exactCard)}
+                      {accordianPanelDisplay(
+                        row.type,
+                        row.detailStatus,
+                        row,
+                        row.exactCard
+                      )}
                     </AccordionPanel>
                   </AccordionItem>
                 ))}
@@ -1009,7 +1017,18 @@ function CustomerStatus() {
                       <Tr key={index}>
                         {/* <Td>{row.twitter}</Td> */}
                         <Td>{row.member}</Td>
-                        <Td>{row.random}</Td>
+                        <Td>
+                          {row.random.split("\n").map(function (item) {
+                            return (
+                              <>
+                              <Text>
+                                {item}
+                                <br />
+                                </Text>
+                              </>
+                            );
+                          })}
+                        </Td>
                         <Td>
                           <b>{row.price}</b>
                         </Td>
