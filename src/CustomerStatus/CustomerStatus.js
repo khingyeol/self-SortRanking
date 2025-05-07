@@ -414,6 +414,10 @@ function CustomerStatus() {
       case "knpops":
         return (
           <>
+          <Box textAlign={"left"}>
+              <Tag bgColor="pink.100">{"เบเนที่ได้"}</Tag>
+              {exactCard}
+            </Box>
             <Box
               // maxW={'330px'}
               w={"full"}
